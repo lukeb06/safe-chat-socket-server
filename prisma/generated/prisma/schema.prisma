@@ -1,0 +1,43 @@
+generator client {
+  provider      = "prisma-client-js"
+  output        = "./generated/prisma"
+  binaryTargets = ["native", "debian-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Friend {
+  id                         Int      @id @default(autoincrement())
+  createdAt                  DateTime @default(now())
+  userId                     Int
+  friendId                   Int
+  User_Friend_friendIdToUser User     @relation("Friend_friendIdToUser", fields: [friendId], references: [id], onDelete: Cascade)
+  User_Friend_userIdToUser   User     @relation("Friend_userIdToUser", fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Message {
+  content                        String
+  createdAt                      DateTime @default(now())
+  id                             Int      @id @default(autoincrement())
+  authorId                       Int
+  recipientId                    Int
+  User_Message_authorIdToUser    User     @relation("Message_authorIdToUser", fields: [authorId], references: [id], onDelete: Cascade)
+  User_Message_recipientIdToUser User     @relation("Message_recipientIdToUser", fields: [recipientId], references: [id], onDelete: Cascade)
+}
+
+model User {
+  avatarUrl                         String?
+  createdAt                         DateTime  @default(now())
+  displayName                       String?
+  passwordHash                      String
+  passwordSalt                      String
+  username                          String    @unique
+  id                                Int       @id @default(autoincrement())
+  Friend_Friend_friendIdToUser      Friend[]  @relation("Friend_friendIdToUser")
+  Friend_Friend_userIdToUser        Friend[]  @relation("Friend_userIdToUser")
+  Message_Message_authorIdToUser    Message[] @relation("Message_authorIdToUser")
+  Message_Message_recipientIdToUser Message[] @relation("Message_recipientIdToUser")
+}
