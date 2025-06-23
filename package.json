@@ -1,0 +1,22 @@
+{
+  "name": "safe-chat-socket-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.10.0",
+  "dependencies": {
+    "@prisma/client": "6.10.1",
+    "dotenv": "^16.5.0",
+    "simple-web-tokens": "^1.0.5",
+    "socket.io": "^4.8.1"
+  },
+  "devDependencies": {
+    "prisma": "6.10.1"
+  }
+}
