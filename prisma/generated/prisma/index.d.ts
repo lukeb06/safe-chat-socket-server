@@ -28,6 +28,11 @@ export type Message = $Result.DefaultSelection<Prisma.$MessagePayload>
  * 
  */
 export type User = $Result.DefaultSelection<Prisma.$UserPayload>
+/**
+ * Model Channel
+ * 
+ */
+export type Channel = $Result.DefaultSelection<Prisma.$ChannelPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -183,6 +188,16 @@ export class PrismaClient<
     * ```
     */
   get user(): Prisma.UserDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.channel`: Exposes CRUD operations for the **Channel** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Channels
+    * const channels = await prisma.channel.findMany()
+    * ```
+    */
+  get channel(): Prisma.ChannelDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -625,7 +640,8 @@ export namespace Prisma {
   export const ModelName: {
     Friend: 'Friend',
     Message: 'Message',
-    User: 'User'
+    User: 'User',
+    Channel: 'Channel'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -644,7 +660,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "friend" | "message" | "user"
+      modelProps: "friend" | "message" | "user" | "channel"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -870,6 +886,80 @@ export namespace Prisma {
           }
         }
       }
+      Channel: {
+        payload: Prisma.$ChannelPayload<ExtArgs>
+        fields: Prisma.ChannelFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ChannelFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ChannelPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ChannelFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ChannelPayload>
+          }
+          findFirst: {
+            args: Prisma.ChannelFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ChannelPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ChannelFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ChannelPayload>
+          }
+          findMany: {
+            args: Prisma.ChannelFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ChannelPayload>[]
+          }
+          create: {
+            args: Prisma.ChannelCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ChannelPayload>
+          }
+          createMany: {
+            args: Prisma.ChannelCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ChannelCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ChannelPayload>[]
+          }
+          delete: {
+            args: Prisma.ChannelDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ChannelPayload>
+          }
+          update: {
+            args: Prisma.ChannelUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ChannelPayload>
+          }
+          deleteMany: {
+            args: Prisma.ChannelDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ChannelUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ChannelUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ChannelPayload>[]
+          }
+          upsert: {
+            args: Prisma.ChannelUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ChannelPayload>
+          }
+          aggregate: {
+            args: Prisma.ChannelAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateChannel>
+          }
+          groupBy: {
+            args: Prisma.ChannelGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ChannelGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ChannelCountArgs<ExtArgs>
+            result: $Utils.Optional<ChannelCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -957,6 +1047,7 @@ export namespace Prisma {
     friend?: FriendOmit
     message?: MessageOmit
     user?: UserOmit
+    channel?: ChannelOmit
   }
 
   /* Types for Logging */
@@ -1051,6 +1142,7 @@ export namespace Prisma {
    */
 
   export type UserCountOutputType = {
+    Channel: number
     Friend_Friend_friendIdToUser: number
     Friend_Friend_userIdToUser: number
     Message_Message_authorIdToUser: number
@@ -1058,6 +1150,7 @@ export namespace Prisma {
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    Channel?: boolean | UserCountOutputTypeCountChannelArgs
     Friend_Friend_friendIdToUser?: boolean | UserCountOutputTypeCountFriend_Friend_friendIdToUserArgs
     Friend_Friend_userIdToUser?: boolean | UserCountOutputTypeCountFriend_Friend_userIdToUserArgs
     Message_Message_authorIdToUser?: boolean | UserCountOutputTypeCountMessage_Message_authorIdToUserArgs
@@ -1073,6 +1166,13 @@ export namespace Prisma {
      * Select specific fields to fetch from the UserCountOutputType
      */
     select?: UserCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountChannelArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ChannelWhereInput
   }
 
   /**
@@ -3525,6 +3625,7 @@ export namespace Prisma {
     passwordSalt?: boolean
     username?: boolean
     id?: boolean
+    Channel?: boolean | User$ChannelArgs<ExtArgs>
     Friend_Friend_friendIdToUser?: boolean | User$Friend_Friend_friendIdToUserArgs<ExtArgs>
     Friend_Friend_userIdToUser?: boolean | User$Friend_Friend_userIdToUserArgs<ExtArgs>
     Message_Message_authorIdToUser?: boolean | User$Message_Message_authorIdToUserArgs<ExtArgs>
@@ -3564,6 +3665,7 @@ export namespace Prisma {
 
   export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"avatarUrl" | "createdAt" | "displayName" | "passwordHash" | "passwordSalt" | "username" | "id", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    Channel?: boolean | User$ChannelArgs<ExtArgs>
     Friend_Friend_friendIdToUser?: boolean | User$Friend_Friend_friendIdToUserArgs<ExtArgs>
     Friend_Friend_userIdToUser?: boolean | User$Friend_Friend_userIdToUserArgs<ExtArgs>
     Message_Message_authorIdToUser?: boolean | User$Message_Message_authorIdToUserArgs<ExtArgs>
@@ -3576,6 +3678,7 @@ export namespace Prisma {
   export type $UserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "User"
     objects: {
+      Channel: Prisma.$ChannelPayload<ExtArgs>[]
       Friend_Friend_friendIdToUser: Prisma.$FriendPayload<ExtArgs>[]
       Friend_Friend_userIdToUser: Prisma.$FriendPayload<ExtArgs>[]
       Message_Message_authorIdToUser: Prisma.$MessagePayload<ExtArgs>[]
@@ -3983,6 +4086,7 @@ export namespace Prisma {
    */
   export interface Prisma__UserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    Channel<T extends User$ChannelArgs<ExtArgs> = {}>(args?: Subset<T, User$ChannelArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ChannelPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     Friend_Friend_friendIdToUser<T extends User$Friend_Friend_friendIdToUserArgs<ExtArgs> = {}>(args?: Subset<T, User$Friend_Friend_friendIdToUserArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FriendPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     Friend_Friend_userIdToUser<T extends User$Friend_Friend_userIdToUserArgs<ExtArgs> = {}>(args?: Subset<T, User$Friend_Friend_userIdToUserArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FriendPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     Message_Message_authorIdToUser<T extends User$Message_Message_authorIdToUserArgs<ExtArgs> = {}>(args?: Subset<T, User$Message_Message_authorIdToUserArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -4411,6 +4515,30 @@ export namespace Prisma {
   }
 
   /**
+   * User.Channel
+   */
+  export type User$ChannelArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Channel
+     */
+    select?: ChannelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Channel
+     */
+    omit?: ChannelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChannelInclude<ExtArgs> | null
+    where?: ChannelWhereInput
+    orderBy?: ChannelOrderByWithRelationInput | ChannelOrderByWithRelationInput[]
+    cursor?: ChannelWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ChannelScalarFieldEnum | ChannelScalarFieldEnum[]
+  }
+
+  /**
    * User.Friend_Friend_friendIdToUser
    */
   export type User$Friend_Friend_friendIdToUserArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4526,6 +4654,1095 @@ export namespace Prisma {
 
 
   /**
+   * Model Channel
+   */
+
+  export type AggregateChannel = {
+    _count: ChannelCountAggregateOutputType | null
+    _avg: ChannelAvgAggregateOutputType | null
+    _sum: ChannelSumAggregateOutputType | null
+    _min: ChannelMinAggregateOutputType | null
+    _max: ChannelMaxAggregateOutputType | null
+  }
+
+  export type ChannelAvgAggregateOutputType = {
+    id: number | null
+    ownerId: number | null
+  }
+
+  export type ChannelSumAggregateOutputType = {
+    id: number | null
+    ownerId: number | null
+  }
+
+  export type ChannelMinAggregateOutputType = {
+    id: number | null
+    name: string | null
+    ownerId: number | null
+  }
+
+  export type ChannelMaxAggregateOutputType = {
+    id: number | null
+    name: string | null
+    ownerId: number | null
+  }
+
+  export type ChannelCountAggregateOutputType = {
+    id: number
+    name: number
+    ownerId: number
+    _all: number
+  }
+
+
+  export type ChannelAvgAggregateInputType = {
+    id?: true
+    ownerId?: true
+  }
+
+  export type ChannelSumAggregateInputType = {
+    id?: true
+    ownerId?: true
+  }
+
+  export type ChannelMinAggregateInputType = {
+    id?: true
+    name?: true
+    ownerId?: true
+  }
+
+  export type ChannelMaxAggregateInputType = {
+    id?: true
+    name?: true
+    ownerId?: true
+  }
+
+  export type ChannelCountAggregateInputType = {
+    id?: true
+    name?: true
+    ownerId?: true
+    _all?: true
+  }
+
+  export type ChannelAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Channel to aggregate.
+     */
+    where?: ChannelWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Channels to fetch.
+     */
+    orderBy?: ChannelOrderByWithRelationInput | ChannelOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ChannelWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Channels from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Channels.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Channels
+    **/
+    _count?: true | ChannelCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ChannelAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ChannelSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ChannelMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ChannelMaxAggregateInputType
+  }
+
+  export type GetChannelAggregateType<T extends ChannelAggregateArgs> = {
+        [P in keyof T & keyof AggregateChannel]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateChannel[P]>
+      : GetScalarType<T[P], AggregateChannel[P]>
+  }
+
+
+
+
+  export type ChannelGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ChannelWhereInput
+    orderBy?: ChannelOrderByWithAggregationInput | ChannelOrderByWithAggregationInput[]
+    by: ChannelScalarFieldEnum[] | ChannelScalarFieldEnum
+    having?: ChannelScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ChannelCountAggregateInputType | true
+    _avg?: ChannelAvgAggregateInputType
+    _sum?: ChannelSumAggregateInputType
+    _min?: ChannelMinAggregateInputType
+    _max?: ChannelMaxAggregateInputType
+  }
+
+  export type ChannelGroupByOutputType = {
+    id: number
+    name: string
+    ownerId: number | null
+    _count: ChannelCountAggregateOutputType | null
+    _avg: ChannelAvgAggregateOutputType | null
+    _sum: ChannelSumAggregateOutputType | null
+    _min: ChannelMinAggregateOutputType | null
+    _max: ChannelMaxAggregateOutputType | null
+  }
+
+  type GetChannelGroupByPayload<T extends ChannelGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ChannelGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ChannelGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ChannelGroupByOutputType[P]>
+            : GetScalarType<T[P], ChannelGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ChannelSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    ownerId?: boolean
+    User?: boolean | Channel$UserArgs<ExtArgs>
+  }, ExtArgs["result"]["channel"]>
+
+  export type ChannelSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    ownerId?: boolean
+    User?: boolean | Channel$UserArgs<ExtArgs>
+  }, ExtArgs["result"]["channel"]>
+
+  export type ChannelSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    ownerId?: boolean
+    User?: boolean | Channel$UserArgs<ExtArgs>
+  }, ExtArgs["result"]["channel"]>
+
+  export type ChannelSelectScalar = {
+    id?: boolean
+    name?: boolean
+    ownerId?: boolean
+  }
+
+  export type ChannelOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "ownerId", ExtArgs["result"]["channel"]>
+  export type ChannelInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    User?: boolean | Channel$UserArgs<ExtArgs>
+  }
+  export type ChannelIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    User?: boolean | Channel$UserArgs<ExtArgs>
+  }
+  export type ChannelIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    User?: boolean | Channel$UserArgs<ExtArgs>
+  }
+
+  export type $ChannelPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Channel"
+    objects: {
+      User: Prisma.$UserPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      name: string
+      ownerId: number | null
+    }, ExtArgs["result"]["channel"]>
+    composites: {}
+  }
+
+  type ChannelGetPayload<S extends boolean | null | undefined | ChannelDefaultArgs> = $Result.GetResult<Prisma.$ChannelPayload, S>
+
+  type ChannelCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ChannelFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ChannelCountAggregateInputType | true
+    }
+
+  export interface ChannelDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Channel'], meta: { name: 'Channel' } }
+    /**
+     * Find zero or one Channel that matches the filter.
+     * @param {ChannelFindUniqueArgs} args - Arguments to find a Channel
+     * @example
+     * // Get one Channel
+     * const channel = await prisma.channel.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ChannelFindUniqueArgs>(args: SelectSubset<T, ChannelFindUniqueArgs<ExtArgs>>): Prisma__ChannelClient<$Result.GetResult<Prisma.$ChannelPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Channel that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ChannelFindUniqueOrThrowArgs} args - Arguments to find a Channel
+     * @example
+     * // Get one Channel
+     * const channel = await prisma.channel.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ChannelFindUniqueOrThrowArgs>(args: SelectSubset<T, ChannelFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ChannelClient<$Result.GetResult<Prisma.$ChannelPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Channel that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ChannelFindFirstArgs} args - Arguments to find a Channel
+     * @example
+     * // Get one Channel
+     * const channel = await prisma.channel.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ChannelFindFirstArgs>(args?: SelectSubset<T, ChannelFindFirstArgs<ExtArgs>>): Prisma__ChannelClient<$Result.GetResult<Prisma.$ChannelPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Channel that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ChannelFindFirstOrThrowArgs} args - Arguments to find a Channel
+     * @example
+     * // Get one Channel
+     * const channel = await prisma.channel.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ChannelFindFirstOrThrowArgs>(args?: SelectSubset<T, ChannelFindFirstOrThrowArgs<ExtArgs>>): Prisma__ChannelClient<$Result.GetResult<Prisma.$ChannelPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Channels that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ChannelFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Channels
+     * const channels = await prisma.channel.findMany()
+     * 
+     * // Get first 10 Channels
+     * const channels = await prisma.channel.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const channelWithIdOnly = await prisma.channel.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ChannelFindManyArgs>(args?: SelectSubset<T, ChannelFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ChannelPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Channel.
+     * @param {ChannelCreateArgs} args - Arguments to create a Channel.
+     * @example
+     * // Create one Channel
+     * const Channel = await prisma.channel.create({
+     *   data: {
+     *     // ... data to create a Channel
+     *   }
+     * })
+     * 
+     */
+    create<T extends ChannelCreateArgs>(args: SelectSubset<T, ChannelCreateArgs<ExtArgs>>): Prisma__ChannelClient<$Result.GetResult<Prisma.$ChannelPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Channels.
+     * @param {ChannelCreateManyArgs} args - Arguments to create many Channels.
+     * @example
+     * // Create many Channels
+     * const channel = await prisma.channel.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ChannelCreateManyArgs>(args?: SelectSubset<T, ChannelCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Channels and returns the data saved in the database.
+     * @param {ChannelCreateManyAndReturnArgs} args - Arguments to create many Channels.
+     * @example
+     * // Create many Channels
+     * const channel = await prisma.channel.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Channels and only return the `id`
+     * const channelWithIdOnly = await prisma.channel.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ChannelCreateManyAndReturnArgs>(args?: SelectSubset<T, ChannelCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ChannelPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Channel.
+     * @param {ChannelDeleteArgs} args - Arguments to delete one Channel.
+     * @example
+     * // Delete one Channel
+     * const Channel = await prisma.channel.delete({
+     *   where: {
+     *     // ... filter to delete one Channel
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ChannelDeleteArgs>(args: SelectSubset<T, ChannelDeleteArgs<ExtArgs>>): Prisma__ChannelClient<$Result.GetResult<Prisma.$ChannelPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Channel.
+     * @param {ChannelUpdateArgs} args - Arguments to update one Channel.
+     * @example
+     * // Update one Channel
+     * const channel = await prisma.channel.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ChannelUpdateArgs>(args: SelectSubset<T, ChannelUpdateArgs<ExtArgs>>): Prisma__ChannelClient<$Result.GetResult<Prisma.$ChannelPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Channels.
+     * @param {ChannelDeleteManyArgs} args - Arguments to filter Channels to delete.
+     * @example
+     * // Delete a few Channels
+     * const { count } = await prisma.channel.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ChannelDeleteManyArgs>(args?: SelectSubset<T, ChannelDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Channels.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ChannelUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Channels
+     * const channel = await prisma.channel.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ChannelUpdateManyArgs>(args: SelectSubset<T, ChannelUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Channels and returns the data updated in the database.
+     * @param {ChannelUpdateManyAndReturnArgs} args - Arguments to update many Channels.
+     * @example
+     * // Update many Channels
+     * const channel = await prisma.channel.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Channels and only return the `id`
+     * const channelWithIdOnly = await prisma.channel.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ChannelUpdateManyAndReturnArgs>(args: SelectSubset<T, ChannelUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ChannelPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Channel.
+     * @param {ChannelUpsertArgs} args - Arguments to update or create a Channel.
+     * @example
+     * // Update or create a Channel
+     * const channel = await prisma.channel.upsert({
+     *   create: {
+     *     // ... data to create a Channel
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Channel we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ChannelUpsertArgs>(args: SelectSubset<T, ChannelUpsertArgs<ExtArgs>>): Prisma__ChannelClient<$Result.GetResult<Prisma.$ChannelPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Channels.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ChannelCountArgs} args - Arguments to filter Channels to count.
+     * @example
+     * // Count the number of Channels
+     * const count = await prisma.channel.count({
+     *   where: {
+     *     // ... the filter for the Channels we want to count
+     *   }
+     * })
+    **/
+    count<T extends ChannelCountArgs>(
+      args?: Subset<T, ChannelCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ChannelCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Channel.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ChannelAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ChannelAggregateArgs>(args: Subset<T, ChannelAggregateArgs>): Prisma.PrismaPromise<GetChannelAggregateType<T>>
+
+    /**
+     * Group by Channel.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ChannelGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ChannelGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ChannelGroupByArgs['orderBy'] }
+        : { orderBy?: ChannelGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ChannelGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetChannelGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Channel model
+   */
+  readonly fields: ChannelFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Channel.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ChannelClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    User<T extends Channel$UserArgs<ExtArgs> = {}>(args?: Subset<T, Channel$UserArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Channel model
+   */
+  interface ChannelFieldRefs {
+    readonly id: FieldRef<"Channel", 'Int'>
+    readonly name: FieldRef<"Channel", 'String'>
+    readonly ownerId: FieldRef<"Channel", 'Int'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Channel findUnique
+   */
+  export type ChannelFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Channel
+     */
+    select?: ChannelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Channel
+     */
+    omit?: ChannelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChannelInclude<ExtArgs> | null
+    /**
+     * Filter, which Channel to fetch.
+     */
+    where: ChannelWhereUniqueInput
+  }
+
+  /**
+   * Channel findUniqueOrThrow
+   */
+  export type ChannelFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Channel
+     */
+    select?: ChannelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Channel
+     */
+    omit?: ChannelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChannelInclude<ExtArgs> | null
+    /**
+     * Filter, which Channel to fetch.
+     */
+    where: ChannelWhereUniqueInput
+  }
+
+  /**
+   * Channel findFirst
+   */
+  export type ChannelFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Channel
+     */
+    select?: ChannelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Channel
+     */
+    omit?: ChannelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChannelInclude<ExtArgs> | null
+    /**
+     * Filter, which Channel to fetch.
+     */
+    where?: ChannelWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Channels to fetch.
+     */
+    orderBy?: ChannelOrderByWithRelationInput | ChannelOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Channels.
+     */
+    cursor?: ChannelWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Channels from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Channels.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Channels.
+     */
+    distinct?: ChannelScalarFieldEnum | ChannelScalarFieldEnum[]
+  }
+
+  /**
+   * Channel findFirstOrThrow
+   */
+  export type ChannelFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Channel
+     */
+    select?: ChannelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Channel
+     */
+    omit?: ChannelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChannelInclude<ExtArgs> | null
+    /**
+     * Filter, which Channel to fetch.
+     */
+    where?: ChannelWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Channels to fetch.
+     */
+    orderBy?: ChannelOrderByWithRelationInput | ChannelOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Channels.
+     */
+    cursor?: ChannelWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Channels from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Channels.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Channels.
+     */
+    distinct?: ChannelScalarFieldEnum | ChannelScalarFieldEnum[]
+  }
+
+  /**
+   * Channel findMany
+   */
+  export type ChannelFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Channel
+     */
+    select?: ChannelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Channel
+     */
+    omit?: ChannelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChannelInclude<ExtArgs> | null
+    /**
+     * Filter, which Channels to fetch.
+     */
+    where?: ChannelWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Channels to fetch.
+     */
+    orderBy?: ChannelOrderByWithRelationInput | ChannelOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Channels.
+     */
+    cursor?: ChannelWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Channels from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Channels.
+     */
+    skip?: number
+    distinct?: ChannelScalarFieldEnum | ChannelScalarFieldEnum[]
+  }
+
+  /**
+   * Channel create
+   */
+  export type ChannelCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Channel
+     */
+    select?: ChannelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Channel
+     */
+    omit?: ChannelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChannelInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Channel.
+     */
+    data: XOR<ChannelCreateInput, ChannelUncheckedCreateInput>
+  }
+
+  /**
+   * Channel createMany
+   */
+  export type ChannelCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Channels.
+     */
+    data: ChannelCreateManyInput | ChannelCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Channel createManyAndReturn
+   */
+  export type ChannelCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Channel
+     */
+    select?: ChannelSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Channel
+     */
+    omit?: ChannelOmit<ExtArgs> | null
+    /**
+     * The data used to create many Channels.
+     */
+    data: ChannelCreateManyInput | ChannelCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChannelIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Channel update
+   */
+  export type ChannelUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Channel
+     */
+    select?: ChannelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Channel
+     */
+    omit?: ChannelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChannelInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Channel.
+     */
+    data: XOR<ChannelUpdateInput, ChannelUncheckedUpdateInput>
+    /**
+     * Choose, which Channel to update.
+     */
+    where: ChannelWhereUniqueInput
+  }
+
+  /**
+   * Channel updateMany
+   */
+  export type ChannelUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Channels.
+     */
+    data: XOR<ChannelUpdateManyMutationInput, ChannelUncheckedUpdateManyInput>
+    /**
+     * Filter which Channels to update
+     */
+    where?: ChannelWhereInput
+    /**
+     * Limit how many Channels to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Channel updateManyAndReturn
+   */
+  export type ChannelUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Channel
+     */
+    select?: ChannelSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Channel
+     */
+    omit?: ChannelOmit<ExtArgs> | null
+    /**
+     * The data used to update Channels.
+     */
+    data: XOR<ChannelUpdateManyMutationInput, ChannelUncheckedUpdateManyInput>
+    /**
+     * Filter which Channels to update
+     */
+    where?: ChannelWhereInput
+    /**
+     * Limit how many Channels to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChannelIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Channel upsert
+   */
+  export type ChannelUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Channel
+     */
+    select?: ChannelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Channel
+     */
+    omit?: ChannelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChannelInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Channel to update in case it exists.
+     */
+    where: ChannelWhereUniqueInput
+    /**
+     * In case the Channel found by the `where` argument doesn't exist, create a new Channel with this data.
+     */
+    create: XOR<ChannelCreateInput, ChannelUncheckedCreateInput>
+    /**
+     * In case the Channel was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ChannelUpdateInput, ChannelUncheckedUpdateInput>
+  }
+
+  /**
+   * Channel delete
+   */
+  export type ChannelDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Channel
+     */
+    select?: ChannelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Channel
+     */
+    omit?: ChannelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChannelInclude<ExtArgs> | null
+    /**
+     * Filter which Channel to delete.
+     */
+    where: ChannelWhereUniqueInput
+  }
+
+  /**
+   * Channel deleteMany
+   */
+  export type ChannelDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Channels to delete
+     */
+    where?: ChannelWhereInput
+    /**
+     * Limit how many Channels to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Channel.User
+   */
+  export type Channel$UserArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+  }
+
+  /**
+   * Channel without action
+   */
+  export type ChannelDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Channel
+     */
+    select?: ChannelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Channel
+     */
+    omit?: ChannelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChannelInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -4571,6 +5788,15 @@ export namespace Prisma {
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+
+
+  export const ChannelScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    ownerId: 'ownerId'
+  };
+
+  export type ChannelScalarFieldEnum = (typeof ChannelScalarFieldEnum)[keyof typeof ChannelScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -4787,6 +6013,7 @@ export namespace Prisma {
     passwordSalt?: StringFilter<"User"> | string
     username?: StringFilter<"User"> | string
     id?: IntFilter<"User"> | number
+    Channel?: ChannelListRelationFilter
     Friend_Friend_friendIdToUser?: FriendListRelationFilter
     Friend_Friend_userIdToUser?: FriendListRelationFilter
     Message_Message_authorIdToUser?: MessageListRelationFilter
@@ -4801,6 +6028,7 @@ export namespace Prisma {
     passwordSalt?: SortOrder
     username?: SortOrder
     id?: SortOrder
+    Channel?: ChannelOrderByRelationAggregateInput
     Friend_Friend_friendIdToUser?: FriendOrderByRelationAggregateInput
     Friend_Friend_userIdToUser?: FriendOrderByRelationAggregateInput
     Message_Message_authorIdToUser?: MessageOrderByRelationAggregateInput
@@ -4818,6 +6046,7 @@ export namespace Prisma {
     displayName?: StringNullableFilter<"User"> | string | null
     passwordHash?: StringFilter<"User"> | string
     passwordSalt?: StringFilter<"User"> | string
+    Channel?: ChannelListRelationFilter
     Friend_Friend_friendIdToUser?: FriendListRelationFilter
     Friend_Friend_userIdToUser?: FriendListRelationFilter
     Message_Message_authorIdToUser?: MessageListRelationFilter
@@ -4850,6 +6079,53 @@ export namespace Prisma {
     passwordSalt?: StringWithAggregatesFilter<"User"> | string
     username?: StringWithAggregatesFilter<"User"> | string
     id?: IntWithAggregatesFilter<"User"> | number
+  }
+
+  export type ChannelWhereInput = {
+    AND?: ChannelWhereInput | ChannelWhereInput[]
+    OR?: ChannelWhereInput[]
+    NOT?: ChannelWhereInput | ChannelWhereInput[]
+    id?: IntFilter<"Channel"> | number
+    name?: StringFilter<"Channel"> | string
+    ownerId?: IntNullableFilter<"Channel"> | number | null
+    User?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+  }
+
+  export type ChannelOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    ownerId?: SortOrderInput | SortOrder
+    User?: UserOrderByWithRelationInput
+  }
+
+  export type ChannelWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    name?: string
+    AND?: ChannelWhereInput | ChannelWhereInput[]
+    OR?: ChannelWhereInput[]
+    NOT?: ChannelWhereInput | ChannelWhereInput[]
+    ownerId?: IntNullableFilter<"Channel"> | number | null
+    User?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+  }, "id" | "name">
+
+  export type ChannelOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    ownerId?: SortOrderInput | SortOrder
+    _count?: ChannelCountOrderByAggregateInput
+    _avg?: ChannelAvgOrderByAggregateInput
+    _max?: ChannelMaxOrderByAggregateInput
+    _min?: ChannelMinOrderByAggregateInput
+    _sum?: ChannelSumOrderByAggregateInput
+  }
+
+  export type ChannelScalarWhereWithAggregatesInput = {
+    AND?: ChannelScalarWhereWithAggregatesInput | ChannelScalarWhereWithAggregatesInput[]
+    OR?: ChannelScalarWhereWithAggregatesInput[]
+    NOT?: ChannelScalarWhereWithAggregatesInput | ChannelScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"Channel"> | number
+    name?: StringWithAggregatesFilter<"Channel"> | string
+    ownerId?: IntNullableWithAggregatesFilter<"Channel"> | number | null
   }
 
   export type FriendCreateInput = {
@@ -4954,6 +6230,7 @@ export namespace Prisma {
     passwordHash: string
     passwordSalt: string
     username: string
+    Channel?: ChannelCreateNestedManyWithoutUserInput
     Friend_Friend_friendIdToUser?: FriendCreateNestedManyWithoutUser_Friend_friendIdToUserInput
     Friend_Friend_userIdToUser?: FriendCreateNestedManyWithoutUser_Friend_userIdToUserInput
     Message_Message_authorIdToUser?: MessageCreateNestedManyWithoutUser_Message_authorIdToUserInput
@@ -4968,6 +6245,7 @@ export namespace Prisma {
     passwordSalt: string
     username: string
     id?: number
+    Channel?: ChannelUncheckedCreateNestedManyWithoutUserInput
     Friend_Friend_friendIdToUser?: FriendUncheckedCreateNestedManyWithoutUser_Friend_friendIdToUserInput
     Friend_Friend_userIdToUser?: FriendUncheckedCreateNestedManyWithoutUser_Friend_userIdToUserInput
     Message_Message_authorIdToUser?: MessageUncheckedCreateNestedManyWithoutUser_Message_authorIdToUserInput
@@ -4981,6 +6259,7 @@ export namespace Prisma {
     passwordHash?: StringFieldUpdateOperationsInput | string
     passwordSalt?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
+    Channel?: ChannelUpdateManyWithoutUserNestedInput
     Friend_Friend_friendIdToUser?: FriendUpdateManyWithoutUser_Friend_friendIdToUserNestedInput
     Friend_Friend_userIdToUser?: FriendUpdateManyWithoutUser_Friend_userIdToUserNestedInput
     Message_Message_authorIdToUser?: MessageUpdateManyWithoutUser_Message_authorIdToUserNestedInput
@@ -4995,6 +6274,7 @@ export namespace Prisma {
     passwordSalt?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
     id?: IntFieldUpdateOperationsInput | number
+    Channel?: ChannelUncheckedUpdateManyWithoutUserNestedInput
     Friend_Friend_friendIdToUser?: FriendUncheckedUpdateManyWithoutUser_Friend_friendIdToUserNestedInput
     Friend_Friend_userIdToUser?: FriendUncheckedUpdateManyWithoutUser_Friend_userIdToUserNestedInput
     Message_Message_authorIdToUser?: MessageUncheckedUpdateManyWithoutUser_Message_authorIdToUserNestedInput
@@ -5028,6 +6308,44 @@ export namespace Prisma {
     passwordSalt?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
     id?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type ChannelCreateInput = {
+    name: string
+    User?: UserCreateNestedOneWithoutChannelInput
+  }
+
+  export type ChannelUncheckedCreateInput = {
+    id?: number
+    name: string
+    ownerId?: number | null
+  }
+
+  export type ChannelUpdateInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    User?: UserUpdateOneWithoutChannelNestedInput
+  }
+
+  export type ChannelUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    ownerId?: NullableIntFieldUpdateOperationsInput | number | null
+  }
+
+  export type ChannelCreateManyInput = {
+    id?: number
+    name: string
+    ownerId?: number | null
+  }
+
+  export type ChannelUpdateManyMutationInput = {
+    name?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type ChannelUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    ownerId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -5204,6 +6522,12 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
+  export type ChannelListRelationFilter = {
+    every?: ChannelWhereInput
+    some?: ChannelWhereInput
+    none?: ChannelWhereInput
+  }
+
   export type FriendListRelationFilter = {
     every?: FriendWhereInput
     some?: FriendWhereInput
@@ -5219,6 +6543,10 @@ export namespace Prisma {
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
+  }
+
+  export type ChannelOrderByRelationAggregateInput = {
+    _count?: SortOrder
   }
 
   export type FriendOrderByRelationAggregateInput = {
@@ -5283,6 +6611,66 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedStringNullableFilter<$PrismaModel>
     _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type IntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type UserNullableScalarRelationFilter = {
+    is?: UserWhereInput | null
+    isNot?: UserWhereInput | null
+  }
+
+  export type ChannelCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    ownerId?: SortOrder
+  }
+
+  export type ChannelAvgOrderByAggregateInput = {
+    id?: SortOrder
+    ownerId?: SortOrder
+  }
+
+  export type ChannelMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    ownerId?: SortOrder
+  }
+
+  export type ChannelMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    ownerId?: SortOrder
+  }
+
+  export type ChannelSumOrderByAggregateInput = {
+    id?: SortOrder
+    ownerId?: SortOrder
+  }
+
+  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
   }
 
   export type UserCreateNestedOneWithoutFriend_Friend_friendIdToUserInput = {
@@ -5357,6 +6745,13 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutMessage_Message_recipientIdToUserInput, UserUpdateWithoutMessage_Message_recipientIdToUserInput>, UserUncheckedUpdateWithoutMessage_Message_recipientIdToUserInput>
   }
 
+  export type ChannelCreateNestedManyWithoutUserInput = {
+    create?: XOR<ChannelCreateWithoutUserInput, ChannelUncheckedCreateWithoutUserInput> | ChannelCreateWithoutUserInput[] | ChannelUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ChannelCreateOrConnectWithoutUserInput | ChannelCreateOrConnectWithoutUserInput[]
+    createMany?: ChannelCreateManyUserInputEnvelope
+    connect?: ChannelWhereUniqueInput | ChannelWhereUniqueInput[]
+  }
+
   export type FriendCreateNestedManyWithoutUser_Friend_friendIdToUserInput = {
     create?: XOR<FriendCreateWithoutUser_Friend_friendIdToUserInput, FriendUncheckedCreateWithoutUser_Friend_friendIdToUserInput> | FriendCreateWithoutUser_Friend_friendIdToUserInput[] | FriendUncheckedCreateWithoutUser_Friend_friendIdToUserInput[]
     connectOrCreate?: FriendCreateOrConnectWithoutUser_Friend_friendIdToUserInput | FriendCreateOrConnectWithoutUser_Friend_friendIdToUserInput[]
@@ -5383,6 +6778,13 @@ export namespace Prisma {
     connectOrCreate?: MessageCreateOrConnectWithoutUser_Message_recipientIdToUserInput | MessageCreateOrConnectWithoutUser_Message_recipientIdToUserInput[]
     createMany?: MessageCreateManyUser_Message_recipientIdToUserInputEnvelope
     connect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+  }
+
+  export type ChannelUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<ChannelCreateWithoutUserInput, ChannelUncheckedCreateWithoutUserInput> | ChannelCreateWithoutUserInput[] | ChannelUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ChannelCreateOrConnectWithoutUserInput | ChannelCreateOrConnectWithoutUserInput[]
+    createMany?: ChannelCreateManyUserInputEnvelope
+    connect?: ChannelWhereUniqueInput | ChannelWhereUniqueInput[]
   }
 
   export type FriendUncheckedCreateNestedManyWithoutUser_Friend_friendIdToUserInput = {
@@ -5415,6 +6817,20 @@ export namespace Prisma {
 
   export type NullableStringFieldUpdateOperationsInput = {
     set?: string | null
+  }
+
+  export type ChannelUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ChannelCreateWithoutUserInput, ChannelUncheckedCreateWithoutUserInput> | ChannelCreateWithoutUserInput[] | ChannelUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ChannelCreateOrConnectWithoutUserInput | ChannelCreateOrConnectWithoutUserInput[]
+    upsert?: ChannelUpsertWithWhereUniqueWithoutUserInput | ChannelUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ChannelCreateManyUserInputEnvelope
+    set?: ChannelWhereUniqueInput | ChannelWhereUniqueInput[]
+    disconnect?: ChannelWhereUniqueInput | ChannelWhereUniqueInput[]
+    delete?: ChannelWhereUniqueInput | ChannelWhereUniqueInput[]
+    connect?: ChannelWhereUniqueInput | ChannelWhereUniqueInput[]
+    update?: ChannelUpdateWithWhereUniqueWithoutUserInput | ChannelUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ChannelUpdateManyWithWhereWithoutUserInput | ChannelUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ChannelScalarWhereInput | ChannelScalarWhereInput[]
   }
 
   export type FriendUpdateManyWithoutUser_Friend_friendIdToUserNestedInput = {
@@ -5473,6 +6889,20 @@ export namespace Prisma {
     deleteMany?: MessageScalarWhereInput | MessageScalarWhereInput[]
   }
 
+  export type ChannelUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ChannelCreateWithoutUserInput, ChannelUncheckedCreateWithoutUserInput> | ChannelCreateWithoutUserInput[] | ChannelUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ChannelCreateOrConnectWithoutUserInput | ChannelCreateOrConnectWithoutUserInput[]
+    upsert?: ChannelUpsertWithWhereUniqueWithoutUserInput | ChannelUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ChannelCreateManyUserInputEnvelope
+    set?: ChannelWhereUniqueInput | ChannelWhereUniqueInput[]
+    disconnect?: ChannelWhereUniqueInput | ChannelWhereUniqueInput[]
+    delete?: ChannelWhereUniqueInput | ChannelWhereUniqueInput[]
+    connect?: ChannelWhereUniqueInput | ChannelWhereUniqueInput[]
+    update?: ChannelUpdateWithWhereUniqueWithoutUserInput | ChannelUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ChannelUpdateManyWithWhereWithoutUserInput | ChannelUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ChannelScalarWhereInput | ChannelScalarWhereInput[]
+  }
+
   export type FriendUncheckedUpdateManyWithoutUser_Friend_friendIdToUserNestedInput = {
     create?: XOR<FriendCreateWithoutUser_Friend_friendIdToUserInput, FriendUncheckedCreateWithoutUser_Friend_friendIdToUserInput> | FriendCreateWithoutUser_Friend_friendIdToUserInput[] | FriendUncheckedCreateWithoutUser_Friend_friendIdToUserInput[]
     connectOrCreate?: FriendCreateOrConnectWithoutUser_Friend_friendIdToUserInput | FriendCreateOrConnectWithoutUser_Friend_friendIdToUserInput[]
@@ -5527,6 +6957,30 @@ export namespace Prisma {
     update?: MessageUpdateWithWhereUniqueWithoutUser_Message_recipientIdToUserInput | MessageUpdateWithWhereUniqueWithoutUser_Message_recipientIdToUserInput[]
     updateMany?: MessageUpdateManyWithWhereWithoutUser_Message_recipientIdToUserInput | MessageUpdateManyWithWhereWithoutUser_Message_recipientIdToUserInput[]
     deleteMany?: MessageScalarWhereInput | MessageScalarWhereInput[]
+  }
+
+  export type UserCreateNestedOneWithoutChannelInput = {
+    create?: XOR<UserCreateWithoutChannelInput, UserUncheckedCreateWithoutChannelInput>
+    connectOrCreate?: UserCreateOrConnectWithoutChannelInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserUpdateOneWithoutChannelNestedInput = {
+    create?: XOR<UserCreateWithoutChannelInput, UserUncheckedCreateWithoutChannelInput>
+    connectOrCreate?: UserCreateOrConnectWithoutChannelInput
+    upsert?: UserUpsertWithoutChannelInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutChannelInput, UserUpdateWithoutChannelInput>, UserUncheckedUpdateWithoutChannelInput>
+  }
+
+  export type NullableIntFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -5665,6 +7119,33 @@ export namespace Prisma {
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
+  export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type NestedFloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
+
   export type UserCreateWithoutFriend_Friend_friendIdToUserInput = {
     avatarUrl?: string | null
     createdAt?: Date | string
@@ -5672,6 +7153,7 @@ export namespace Prisma {
     passwordHash: string
     passwordSalt: string
     username: string
+    Channel?: ChannelCreateNestedManyWithoutUserInput
     Friend_Friend_userIdToUser?: FriendCreateNestedManyWithoutUser_Friend_userIdToUserInput
     Message_Message_authorIdToUser?: MessageCreateNestedManyWithoutUser_Message_authorIdToUserInput
     Message_Message_recipientIdToUser?: MessageCreateNestedManyWithoutUser_Message_recipientIdToUserInput
@@ -5685,6 +7167,7 @@ export namespace Prisma {
     passwordSalt: string
     username: string
     id?: number
+    Channel?: ChannelUncheckedCreateNestedManyWithoutUserInput
     Friend_Friend_userIdToUser?: FriendUncheckedCreateNestedManyWithoutUser_Friend_userIdToUserInput
     Message_Message_authorIdToUser?: MessageUncheckedCreateNestedManyWithoutUser_Message_authorIdToUserInput
     Message_Message_recipientIdToUser?: MessageUncheckedCreateNestedManyWithoutUser_Message_recipientIdToUserInput
@@ -5702,6 +7185,7 @@ export namespace Prisma {
     passwordHash: string
     passwordSalt: string
     username: string
+    Channel?: ChannelCreateNestedManyWithoutUserInput
     Friend_Friend_friendIdToUser?: FriendCreateNestedManyWithoutUser_Friend_friendIdToUserInput
     Message_Message_authorIdToUser?: MessageCreateNestedManyWithoutUser_Message_authorIdToUserInput
     Message_Message_recipientIdToUser?: MessageCreateNestedManyWithoutUser_Message_recipientIdToUserInput
@@ -5715,6 +7199,7 @@ export namespace Prisma {
     passwordSalt: string
     username: string
     id?: number
+    Channel?: ChannelUncheckedCreateNestedManyWithoutUserInput
     Friend_Friend_friendIdToUser?: FriendUncheckedCreateNestedManyWithoutUser_Friend_friendIdToUserInput
     Message_Message_authorIdToUser?: MessageUncheckedCreateNestedManyWithoutUser_Message_authorIdToUserInput
     Message_Message_recipientIdToUser?: MessageUncheckedCreateNestedManyWithoutUser_Message_recipientIdToUserInput
@@ -5743,6 +7228,7 @@ export namespace Prisma {
     passwordHash?: StringFieldUpdateOperationsInput | string
     passwordSalt?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
+    Channel?: ChannelUpdateManyWithoutUserNestedInput
     Friend_Friend_userIdToUser?: FriendUpdateManyWithoutUser_Friend_userIdToUserNestedInput
     Message_Message_authorIdToUser?: MessageUpdateManyWithoutUser_Message_authorIdToUserNestedInput
     Message_Message_recipientIdToUser?: MessageUpdateManyWithoutUser_Message_recipientIdToUserNestedInput
@@ -5756,6 +7242,7 @@ export namespace Prisma {
     passwordSalt?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
     id?: IntFieldUpdateOperationsInput | number
+    Channel?: ChannelUncheckedUpdateManyWithoutUserNestedInput
     Friend_Friend_userIdToUser?: FriendUncheckedUpdateManyWithoutUser_Friend_userIdToUserNestedInput
     Message_Message_authorIdToUser?: MessageUncheckedUpdateManyWithoutUser_Message_authorIdToUserNestedInput
     Message_Message_recipientIdToUser?: MessageUncheckedUpdateManyWithoutUser_Message_recipientIdToUserNestedInput
@@ -5779,6 +7266,7 @@ export namespace Prisma {
     passwordHash?: StringFieldUpdateOperationsInput | string
     passwordSalt?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
+    Channel?: ChannelUpdateManyWithoutUserNestedInput
     Friend_Friend_friendIdToUser?: FriendUpdateManyWithoutUser_Friend_friendIdToUserNestedInput
     Message_Message_authorIdToUser?: MessageUpdateManyWithoutUser_Message_authorIdToUserNestedInput
     Message_Message_recipientIdToUser?: MessageUpdateManyWithoutUser_Message_recipientIdToUserNestedInput
@@ -5792,6 +7280,7 @@ export namespace Prisma {
     passwordSalt?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
     id?: IntFieldUpdateOperationsInput | number
+    Channel?: ChannelUncheckedUpdateManyWithoutUserNestedInput
     Friend_Friend_friendIdToUser?: FriendUncheckedUpdateManyWithoutUser_Friend_friendIdToUserNestedInput
     Message_Message_authorIdToUser?: MessageUncheckedUpdateManyWithoutUser_Message_authorIdToUserNestedInput
     Message_Message_recipientIdToUser?: MessageUncheckedUpdateManyWithoutUser_Message_recipientIdToUserNestedInput
@@ -5804,6 +7293,7 @@ export namespace Prisma {
     passwordHash: string
     passwordSalt: string
     username: string
+    Channel?: ChannelCreateNestedManyWithoutUserInput
     Friend_Friend_friendIdToUser?: FriendCreateNestedManyWithoutUser_Friend_friendIdToUserInput
     Friend_Friend_userIdToUser?: FriendCreateNestedManyWithoutUser_Friend_userIdToUserInput
     Message_Message_recipientIdToUser?: MessageCreateNestedManyWithoutUser_Message_recipientIdToUserInput
@@ -5817,6 +7307,7 @@ export namespace Prisma {
     passwordSalt: string
     username: string
     id?: number
+    Channel?: ChannelUncheckedCreateNestedManyWithoutUserInput
     Friend_Friend_friendIdToUser?: FriendUncheckedCreateNestedManyWithoutUser_Friend_friendIdToUserInput
     Friend_Friend_userIdToUser?: FriendUncheckedCreateNestedManyWithoutUser_Friend_userIdToUserInput
     Message_Message_recipientIdToUser?: MessageUncheckedCreateNestedManyWithoutUser_Message_recipientIdToUserInput
@@ -5834,6 +7325,7 @@ export namespace Prisma {
     passwordHash: string
     passwordSalt: string
     username: string
+    Channel?: ChannelCreateNestedManyWithoutUserInput
     Friend_Friend_friendIdToUser?: FriendCreateNestedManyWithoutUser_Friend_friendIdToUserInput
     Friend_Friend_userIdToUser?: FriendCreateNestedManyWithoutUser_Friend_userIdToUserInput
     Message_Message_authorIdToUser?: MessageCreateNestedManyWithoutUser_Message_authorIdToUserInput
@@ -5847,6 +7339,7 @@ export namespace Prisma {
     passwordSalt: string
     username: string
     id?: number
+    Channel?: ChannelUncheckedCreateNestedManyWithoutUserInput
     Friend_Friend_friendIdToUser?: FriendUncheckedCreateNestedManyWithoutUser_Friend_friendIdToUserInput
     Friend_Friend_userIdToUser?: FriendUncheckedCreateNestedManyWithoutUser_Friend_userIdToUserInput
     Message_Message_authorIdToUser?: MessageUncheckedCreateNestedManyWithoutUser_Message_authorIdToUserInput
@@ -5875,6 +7368,7 @@ export namespace Prisma {
     passwordHash?: StringFieldUpdateOperationsInput | string
     passwordSalt?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
+    Channel?: ChannelUpdateManyWithoutUserNestedInput
     Friend_Friend_friendIdToUser?: FriendUpdateManyWithoutUser_Friend_friendIdToUserNestedInput
     Friend_Friend_userIdToUser?: FriendUpdateManyWithoutUser_Friend_userIdToUserNestedInput
     Message_Message_recipientIdToUser?: MessageUpdateManyWithoutUser_Message_recipientIdToUserNestedInput
@@ -5888,6 +7382,7 @@ export namespace Prisma {
     passwordSalt?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
     id?: IntFieldUpdateOperationsInput | number
+    Channel?: ChannelUncheckedUpdateManyWithoutUserNestedInput
     Friend_Friend_friendIdToUser?: FriendUncheckedUpdateManyWithoutUser_Friend_friendIdToUserNestedInput
     Friend_Friend_userIdToUser?: FriendUncheckedUpdateManyWithoutUser_Friend_userIdToUserNestedInput
     Message_Message_recipientIdToUser?: MessageUncheckedUpdateManyWithoutUser_Message_recipientIdToUserNestedInput
@@ -5911,6 +7406,7 @@ export namespace Prisma {
     passwordHash?: StringFieldUpdateOperationsInput | string
     passwordSalt?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
+    Channel?: ChannelUpdateManyWithoutUserNestedInput
     Friend_Friend_friendIdToUser?: FriendUpdateManyWithoutUser_Friend_friendIdToUserNestedInput
     Friend_Friend_userIdToUser?: FriendUpdateManyWithoutUser_Friend_userIdToUserNestedInput
     Message_Message_authorIdToUser?: MessageUpdateManyWithoutUser_Message_authorIdToUserNestedInput
@@ -5924,9 +7420,29 @@ export namespace Prisma {
     passwordSalt?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
     id?: IntFieldUpdateOperationsInput | number
+    Channel?: ChannelUncheckedUpdateManyWithoutUserNestedInput
     Friend_Friend_friendIdToUser?: FriendUncheckedUpdateManyWithoutUser_Friend_friendIdToUserNestedInput
     Friend_Friend_userIdToUser?: FriendUncheckedUpdateManyWithoutUser_Friend_userIdToUserNestedInput
     Message_Message_authorIdToUser?: MessageUncheckedUpdateManyWithoutUser_Message_authorIdToUserNestedInput
+  }
+
+  export type ChannelCreateWithoutUserInput = {
+    name: string
+  }
+
+  export type ChannelUncheckedCreateWithoutUserInput = {
+    id?: number
+    name: string
+  }
+
+  export type ChannelCreateOrConnectWithoutUserInput = {
+    where: ChannelWhereUniqueInput
+    create: XOR<ChannelCreateWithoutUserInput, ChannelUncheckedCreateWithoutUserInput>
+  }
+
+  export type ChannelCreateManyUserInputEnvelope = {
+    data: ChannelCreateManyUserInput | ChannelCreateManyUserInput[]
+    skipDuplicates?: boolean
   }
 
   export type FriendCreateWithoutUser_Friend_friendIdToUserInput = {
@@ -6017,6 +7533,31 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type ChannelUpsertWithWhereUniqueWithoutUserInput = {
+    where: ChannelWhereUniqueInput
+    update: XOR<ChannelUpdateWithoutUserInput, ChannelUncheckedUpdateWithoutUserInput>
+    create: XOR<ChannelCreateWithoutUserInput, ChannelUncheckedCreateWithoutUserInput>
+  }
+
+  export type ChannelUpdateWithWhereUniqueWithoutUserInput = {
+    where: ChannelWhereUniqueInput
+    data: XOR<ChannelUpdateWithoutUserInput, ChannelUncheckedUpdateWithoutUserInput>
+  }
+
+  export type ChannelUpdateManyWithWhereWithoutUserInput = {
+    where: ChannelScalarWhereInput
+    data: XOR<ChannelUpdateManyMutationInput, ChannelUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type ChannelScalarWhereInput = {
+    AND?: ChannelScalarWhereInput | ChannelScalarWhereInput[]
+    OR?: ChannelScalarWhereInput[]
+    NOT?: ChannelScalarWhereInput | ChannelScalarWhereInput[]
+    id?: IntFilter<"Channel"> | number
+    name?: StringFilter<"Channel"> | string
+    ownerId?: IntNullableFilter<"Channel"> | number | null
+  }
+
   export type FriendUpsertWithWhereUniqueWithoutUser_Friend_friendIdToUserInput = {
     where: FriendWhereUniqueInput
     update: XOR<FriendUpdateWithoutUser_Friend_friendIdToUserInput, FriendUncheckedUpdateWithoutUser_Friend_friendIdToUserInput>
@@ -6102,6 +7643,81 @@ export namespace Prisma {
     data: XOR<MessageUpdateManyMutationInput, MessageUncheckedUpdateManyWithoutUser_Message_recipientIdToUserInput>
   }
 
+  export type UserCreateWithoutChannelInput = {
+    avatarUrl?: string | null
+    createdAt?: Date | string
+    displayName?: string | null
+    passwordHash: string
+    passwordSalt: string
+    username: string
+    Friend_Friend_friendIdToUser?: FriendCreateNestedManyWithoutUser_Friend_friendIdToUserInput
+    Friend_Friend_userIdToUser?: FriendCreateNestedManyWithoutUser_Friend_userIdToUserInput
+    Message_Message_authorIdToUser?: MessageCreateNestedManyWithoutUser_Message_authorIdToUserInput
+    Message_Message_recipientIdToUser?: MessageCreateNestedManyWithoutUser_Message_recipientIdToUserInput
+  }
+
+  export type UserUncheckedCreateWithoutChannelInput = {
+    avatarUrl?: string | null
+    createdAt?: Date | string
+    displayName?: string | null
+    passwordHash: string
+    passwordSalt: string
+    username: string
+    id?: number
+    Friend_Friend_friendIdToUser?: FriendUncheckedCreateNestedManyWithoutUser_Friend_friendIdToUserInput
+    Friend_Friend_userIdToUser?: FriendUncheckedCreateNestedManyWithoutUser_Friend_userIdToUserInput
+    Message_Message_authorIdToUser?: MessageUncheckedCreateNestedManyWithoutUser_Message_authorIdToUserInput
+    Message_Message_recipientIdToUser?: MessageUncheckedCreateNestedManyWithoutUser_Message_recipientIdToUserInput
+  }
+
+  export type UserCreateOrConnectWithoutChannelInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutChannelInput, UserUncheckedCreateWithoutChannelInput>
+  }
+
+  export type UserUpsertWithoutChannelInput = {
+    update: XOR<UserUpdateWithoutChannelInput, UserUncheckedUpdateWithoutChannelInput>
+    create: XOR<UserCreateWithoutChannelInput, UserUncheckedCreateWithoutChannelInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutChannelInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutChannelInput, UserUncheckedUpdateWithoutChannelInput>
+  }
+
+  export type UserUpdateWithoutChannelInput = {
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    displayName?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    passwordSalt?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    Friend_Friend_friendIdToUser?: FriendUpdateManyWithoutUser_Friend_friendIdToUserNestedInput
+    Friend_Friend_userIdToUser?: FriendUpdateManyWithoutUser_Friend_userIdToUserNestedInput
+    Message_Message_authorIdToUser?: MessageUpdateManyWithoutUser_Message_authorIdToUserNestedInput
+    Message_Message_recipientIdToUser?: MessageUpdateManyWithoutUser_Message_recipientIdToUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutChannelInput = {
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    displayName?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    passwordSalt?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    id?: IntFieldUpdateOperationsInput | number
+    Friend_Friend_friendIdToUser?: FriendUncheckedUpdateManyWithoutUser_Friend_friendIdToUserNestedInput
+    Friend_Friend_userIdToUser?: FriendUncheckedUpdateManyWithoutUser_Friend_userIdToUserNestedInput
+    Message_Message_authorIdToUser?: MessageUncheckedUpdateManyWithoutUser_Message_authorIdToUserNestedInput
+    Message_Message_recipientIdToUser?: MessageUncheckedUpdateManyWithoutUser_Message_recipientIdToUserNestedInput
+  }
+
+  export type ChannelCreateManyUserInput = {
+    id?: number
+    name: string
+  }
+
   export type FriendCreateManyUser_Friend_friendIdToUserInput = {
     id?: number
     createdAt?: Date | string
@@ -6126,6 +7742,20 @@ export namespace Prisma {
     createdAt?: Date | string
     id?: number
     authorId: number
+  }
+
+  export type ChannelUpdateWithoutUserInput = {
+    name?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type ChannelUncheckedUpdateWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type ChannelUncheckedUpdateManyWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
   }
 
   export type FriendUpdateWithoutUser_Friend_friendIdToUserInput = {

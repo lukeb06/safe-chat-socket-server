@@ -69,6 +69,14 @@ io.on('connection', socket => {
         recipientSockets.forEach(s => s.emit('chat message', response));
     });
 
+    socket.on('delete message', messageId => {
+        io.emit('delete message', messageId);
+    });
+
+    socket.on('edit message', ({ messageId, newContent }) => {
+        io.emit('edit message', { messageId, newContent });
+    });
+
     socket.on('disconnect', () => {
         const myUser = SOCKET_USER_MAP.get(socket.id);
         SOCKET_USER_MAP.delete(socket.id);

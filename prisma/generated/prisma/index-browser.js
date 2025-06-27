@@ -145,6 +145,12 @@ exports.Prisma.UserScalarFieldEnum = {
   id: 'id'
 };
 
+exports.Prisma.ChannelScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  ownerId: 'ownerId'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -164,7 +170,8 @@ exports.Prisma.NullsOrder = {
 exports.Prisma.ModelName = {
   Friend: 'Friend',
   Message: 'Message',
-  User: 'User'
+  User: 'User',
+  Channel: 'Channel'
 };
 
 /**

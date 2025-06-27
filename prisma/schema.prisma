@@ -36,8 +36,16 @@ model User {
   passwordSalt                      String
   username                          String    @unique
   id                                Int       @id @default(autoincrement())
+  Channel                           Channel[]
   Friend_Friend_friendIdToUser      Friend[]  @relation("Friend_friendIdToUser")
   Friend_Friend_userIdToUser        Friend[]  @relation("Friend_userIdToUser")
   Message_Message_authorIdToUser    Message[] @relation("Message_authorIdToUser")
   Message_Message_recipientIdToUser Message[] @relation("Message_recipientIdToUser")
+}
+
+model Channel {
+  id      Int    @id @default(autoincrement())
+  name    String @unique
+  ownerId Int?
+  User    User?  @relation(fields: [ownerId], references: [id], onDelete: Cascade)
 }
