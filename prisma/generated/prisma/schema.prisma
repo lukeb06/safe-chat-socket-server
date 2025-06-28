@@ -19,33 +19,33 @@ model Friend {
 }
 
 model Message {
-  content                        String
-  createdAt                      DateTime @default(now())
-  id                             Int      @id @default(autoincrement())
-  authorId                       Int
-  recipientId                    Int
-  User_Message_authorIdToUser    User     @relation("Message_authorIdToUser", fields: [authorId], references: [id], onDelete: Cascade)
-  User_Message_recipientIdToUser User     @relation("Message_recipientIdToUser", fields: [recipientId], references: [id], onDelete: Cascade)
+  content                     String
+  createdAt                   DateTime @default(now())
+  id                          Int      @id @default(autoincrement())
+  authorId                    Int
+  channelName                 String
+  User_Message_authorIdToUser User     @relation("Message_authorIdToUser", fields: [authorId], references: [id], onDelete: Cascade)
+  Channel                     Channel  @relation(fields: [channelName], references: [name], onDelete: Cascade)
 }
 
 model User {
-  avatarUrl                         String?
-  createdAt                         DateTime  @default(now())
-  displayName                       String?
-  passwordHash                      String
-  passwordSalt                      String
-  username                          String    @unique
-  id                                Int       @id @default(autoincrement())
-  Channel                           Channel[]
-  Friend_Friend_friendIdToUser      Friend[]  @relation("Friend_friendIdToUser")
-  Friend_Friend_userIdToUser        Friend[]  @relation("Friend_userIdToUser")
-  Message_Message_authorIdToUser    Message[] @relation("Message_authorIdToUser")
-  Message_Message_recipientIdToUser Message[] @relation("Message_recipientIdToUser")
+  avatarUrl                      String?
+  createdAt                      DateTime  @default(now())
+  displayName                    String?
+  passwordHash                   String
+  passwordSalt                   String
+  username                       String    @unique
+  id                             Int       @id @default(autoincrement())
+  Channel                        Channel[]
+  Friend_Friend_friendIdToUser   Friend[]  @relation("Friend_friendIdToUser")
+  Friend_Friend_userIdToUser     Friend[]  @relation("Friend_userIdToUser")
+  Message_Message_authorIdToUser Message[] @relation("Message_authorIdToUser")
 }
 
 model Channel {
-  id      Int    @id @default(autoincrement())
-  name    String @unique
+  id      Int       @id @default(autoincrement())
+  name    String    @unique
   ownerId Int?
-  User    User?  @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  User    User?     @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  Message Message[]
 }

@@ -132,7 +132,7 @@ exports.Prisma.MessageScalarFieldEnum = {
   createdAt: 'createdAt',
   id: 'id',
   authorId: 'authorId',
-  recipientId: 'recipientId'
+  channelName: 'channelName'
 };
 
 exports.Prisma.UserScalarFieldEnum = {

@@ -1146,7 +1146,6 @@ export namespace Prisma {
     Friend_Friend_friendIdToUser: number
     Friend_Friend_userIdToUser: number
     Message_Message_authorIdToUser: number
-    Message_Message_recipientIdToUser: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -1154,7 +1153,6 @@ export namespace Prisma {
     Friend_Friend_friendIdToUser?: boolean | UserCountOutputTypeCountFriend_Friend_friendIdToUserArgs
     Friend_Friend_userIdToUser?: boolean | UserCountOutputTypeCountFriend_Friend_userIdToUserArgs
     Message_Message_authorIdToUser?: boolean | UserCountOutputTypeCountMessage_Message_authorIdToUserArgs
-    Message_Message_recipientIdToUser?: boolean | UserCountOutputTypeCountMessage_Message_recipientIdToUserArgs
   }
 
   // Custom InputTypes
@@ -1196,10 +1194,34 @@ export namespace Prisma {
     where?: MessageWhereInput
   }
 
+
   /**
-   * UserCountOutputType without action
+   * Count Type ChannelCountOutputType
    */
-  export type UserCountOutputTypeCountMessage_Message_recipientIdToUserArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+
+  export type ChannelCountOutputType = {
+    Message: number
+  }
+
+  export type ChannelCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    Message?: boolean | ChannelCountOutputTypeCountMessageArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * ChannelCountOutputType without action
+   */
+  export type ChannelCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ChannelCountOutputType
+     */
+    select?: ChannelCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * ChannelCountOutputType without action
+   */
+  export type ChannelCountOutputTypeCountMessageArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: MessageWhereInput
   }
 
@@ -2318,13 +2340,11 @@ export namespace Prisma {
   export type MessageAvgAggregateOutputType = {
     id: number | null
     authorId: number | null
-    recipientId: number | null
   }
 
   export type MessageSumAggregateOutputType = {
     id: number | null
     authorId: number | null
-    recipientId: number | null
   }
 
   export type MessageMinAggregateOutputType = {
@@ -2332,7 +2352,7 @@ export namespace Prisma {
     createdAt: Date | null
     id: number | null
     authorId: number | null
-    recipientId: number | null
+    channelName: string | null
   }
 
   export type MessageMaxAggregateOutputType = {
@@ -2340,7 +2360,7 @@ export namespace Prisma {
     createdAt: Date | null
     id: number | null
     authorId: number | null
-    recipientId: number | null
+    channelName: string | null
   }
 
   export type MessageCountAggregateOutputType = {
@@ -2348,7 +2368,7 @@ export namespace Prisma {
     createdAt: number
     id: number
     authorId: number
-    recipientId: number
+    channelName: number
     _all: number
   }
 
@@ -2356,13 +2376,11 @@ export namespace Prisma {
   export type MessageAvgAggregateInputType = {
     id?: true
     authorId?: true
-    recipientId?: true
   }
 
   export type MessageSumAggregateInputType = {
     id?: true
     authorId?: true
-    recipientId?: true
   }
 
   export type MessageMinAggregateInputType = {
@@ -2370,7 +2388,7 @@ export namespace Prisma {
     createdAt?: true
     id?: true
     authorId?: true
-    recipientId?: true
+    channelName?: true
   }
 
   export type MessageMaxAggregateInputType = {
@@ -2378,7 +2396,7 @@ export namespace Prisma {
     createdAt?: true
     id?: true
     authorId?: true
-    recipientId?: true
+    channelName?: true
   }
 
   export type MessageCountAggregateInputType = {
@@ -2386,7 +2404,7 @@ export namespace Prisma {
     createdAt?: true
     id?: true
     authorId?: true
-    recipientId?: true
+    channelName?: true
     _all?: true
   }
 
@@ -2481,7 +2499,7 @@ export namespace Prisma {
     createdAt: Date
     id: number
     authorId: number
-    recipientId: number
+    channelName: string
     _count: MessageCountAggregateOutputType | null
     _avg: MessageAvgAggregateOutputType | null
     _sum: MessageSumAggregateOutputType | null
@@ -2508,9 +2526,9 @@ export namespace Prisma {
     createdAt?: boolean
     id?: boolean
     authorId?: boolean
-    recipientId?: boolean
+    channelName?: boolean
     User_Message_authorIdToUser?: boolean | UserDefaultArgs<ExtArgs>
-    User_Message_recipientIdToUser?: boolean | UserDefaultArgs<ExtArgs>
+    Channel?: boolean | ChannelDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["message"]>
 
   export type MessageSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -2518,9 +2536,9 @@ export namespace Prisma {
     createdAt?: boolean
     id?: boolean
     authorId?: boolean
-    recipientId?: boolean
+    channelName?: boolean
     User_Message_authorIdToUser?: boolean | UserDefaultArgs<ExtArgs>
-    User_Message_recipientIdToUser?: boolean | UserDefaultArgs<ExtArgs>
+    Channel?: boolean | ChannelDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["message"]>
 
   export type MessageSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -2528,9 +2546,9 @@ export namespace Prisma {
     createdAt?: boolean
     id?: boolean
     authorId?: boolean
-    recipientId?: boolean
+    channelName?: boolean
     User_Message_authorIdToUser?: boolean | UserDefaultArgs<ExtArgs>
-    User_Message_recipientIdToUser?: boolean | UserDefaultArgs<ExtArgs>
+    Channel?: boolean | ChannelDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["message"]>
 
   export type MessageSelectScalar = {
@@ -2538,35 +2556,35 @@ export namespace Prisma {
     createdAt?: boolean
     id?: boolean
     authorId?: boolean
-    recipientId?: boolean
+    channelName?: boolean
   }
 
-  export type MessageOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"content" | "createdAt" | "id" | "authorId" | "recipientId", ExtArgs["result"]["message"]>
+  export type MessageOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"content" | "createdAt" | "id" | "authorId" | "channelName", ExtArgs["result"]["message"]>
   export type MessageInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     User_Message_authorIdToUser?: boolean | UserDefaultArgs<ExtArgs>
-    User_Message_recipientIdToUser?: boolean | UserDefaultArgs<ExtArgs>
+    Channel?: boolean | ChannelDefaultArgs<ExtArgs>
   }
   export type MessageIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     User_Message_authorIdToUser?: boolean | UserDefaultArgs<ExtArgs>
-    User_Message_recipientIdToUser?: boolean | UserDefaultArgs<ExtArgs>
+    Channel?: boolean | ChannelDefaultArgs<ExtArgs>
   }
   export type MessageIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     User_Message_authorIdToUser?: boolean | UserDefaultArgs<ExtArgs>
-    User_Message_recipientIdToUser?: boolean | UserDefaultArgs<ExtArgs>
+    Channel?: boolean | ChannelDefaultArgs<ExtArgs>
   }
 
   export type $MessagePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Message"
     objects: {
       User_Message_authorIdToUser: Prisma.$UserPayload<ExtArgs>
-      User_Message_recipientIdToUser: Prisma.$UserPayload<ExtArgs>
+      Channel: Prisma.$ChannelPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       content: string
       createdAt: Date
       id: number
       authorId: number
-      recipientId: number
+      channelName: string
     }, ExtArgs["result"]["message"]>
     composites: {}
   }
@@ -2962,7 +2980,7 @@ export namespace Prisma {
   export interface Prisma__MessageClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     User_Message_authorIdToUser<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    User_Message_recipientIdToUser<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    Channel<T extends ChannelDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ChannelDefaultArgs<ExtArgs>>): Prisma__ChannelClient<$Result.GetResult<Prisma.$ChannelPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2996,7 +3014,7 @@ export namespace Prisma {
     readonly createdAt: FieldRef<"Message", 'DateTime'>
     readonly id: FieldRef<"Message", 'Int'>
     readonly authorId: FieldRef<"Message", 'Int'>
-    readonly recipientId: FieldRef<"Message", 'Int'>
+    readonly channelName: FieldRef<"Message", 'String'>
   }
     
 
@@ -3629,7 +3647,6 @@ export namespace Prisma {
     Friend_Friend_friendIdToUser?: boolean | User$Friend_Friend_friendIdToUserArgs<ExtArgs>
     Friend_Friend_userIdToUser?: boolean | User$Friend_Friend_userIdToUserArgs<ExtArgs>
     Message_Message_authorIdToUser?: boolean | User$Message_Message_authorIdToUserArgs<ExtArgs>
-    Message_Message_recipientIdToUser?: boolean | User$Message_Message_recipientIdToUserArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -3669,7 +3686,6 @@ export namespace Prisma {
     Friend_Friend_friendIdToUser?: boolean | User$Friend_Friend_friendIdToUserArgs<ExtArgs>
     Friend_Friend_userIdToUser?: boolean | User$Friend_Friend_userIdToUserArgs<ExtArgs>
     Message_Message_authorIdToUser?: boolean | User$Message_Message_authorIdToUserArgs<ExtArgs>
-    Message_Message_recipientIdToUser?: boolean | User$Message_Message_recipientIdToUserArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -3682,7 +3698,6 @@ export namespace Prisma {
       Friend_Friend_friendIdToUser: Prisma.$FriendPayload<ExtArgs>[]
       Friend_Friend_userIdToUser: Prisma.$FriendPayload<ExtArgs>[]
       Message_Message_authorIdToUser: Prisma.$MessagePayload<ExtArgs>[]
-      Message_Message_recipientIdToUser: Prisma.$MessagePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       avatarUrl: string | null
@@ -4090,7 +4105,6 @@ export namespace Prisma {
     Friend_Friend_friendIdToUser<T extends User$Friend_Friend_friendIdToUserArgs<ExtArgs> = {}>(args?: Subset<T, User$Friend_Friend_friendIdToUserArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FriendPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     Friend_Friend_userIdToUser<T extends User$Friend_Friend_userIdToUserArgs<ExtArgs> = {}>(args?: Subset<T, User$Friend_Friend_userIdToUserArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FriendPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     Message_Message_authorIdToUser<T extends User$Message_Message_authorIdToUserArgs<ExtArgs> = {}>(args?: Subset<T, User$Message_Message_authorIdToUserArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    Message_Message_recipientIdToUser<T extends User$Message_Message_recipientIdToUserArgs<ExtArgs> = {}>(args?: Subset<T, User$Message_Message_recipientIdToUserArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4611,30 +4625,6 @@ export namespace Prisma {
   }
 
   /**
-   * User.Message_Message_recipientIdToUser
-   */
-  export type User$Message_Message_recipientIdToUserArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Message
-     */
-    select?: MessageSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Message
-     */
-    omit?: MessageOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MessageInclude<ExtArgs> | null
-    where?: MessageWhereInput
-    orderBy?: MessageOrderByWithRelationInput | MessageOrderByWithRelationInput[]
-    cursor?: MessageWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: MessageScalarFieldEnum | MessageScalarFieldEnum[]
-  }
-
-  /**
    * User without action
    */
   export type UserDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4840,6 +4830,8 @@ export namespace Prisma {
     name?: boolean
     ownerId?: boolean
     User?: boolean | Channel$UserArgs<ExtArgs>
+    Message?: boolean | Channel$MessageArgs<ExtArgs>
+    _count?: boolean | ChannelCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["channel"]>
 
   export type ChannelSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -4865,6 +4857,8 @@ export namespace Prisma {
   export type ChannelOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "ownerId", ExtArgs["result"]["channel"]>
   export type ChannelInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     User?: boolean | Channel$UserArgs<ExtArgs>
+    Message?: boolean | Channel$MessageArgs<ExtArgs>
+    _count?: boolean | ChannelCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ChannelIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     User?: boolean | Channel$UserArgs<ExtArgs>
@@ -4877,6 +4871,7 @@ export namespace Prisma {
     name: "Channel"
     objects: {
       User: Prisma.$UserPayload<ExtArgs> | null
+      Message: Prisma.$MessagePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -5277,6 +5272,7 @@ export namespace Prisma {
   export interface Prisma__ChannelClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     User<T extends Channel$UserArgs<ExtArgs> = {}>(args?: Subset<T, Channel$UserArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    Message<T extends Channel$MessageArgs<ExtArgs> = {}>(args?: Subset<T, Channel$MessageArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5724,6 +5720,30 @@ export namespace Prisma {
   }
 
   /**
+   * Channel.Message
+   */
+  export type Channel$MessageArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Message
+     */
+    select?: MessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Message
+     */
+    omit?: MessageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MessageInclude<ExtArgs> | null
+    where?: MessageWhereInput
+    orderBy?: MessageOrderByWithRelationInput | MessageOrderByWithRelationInput[]
+    cursor?: MessageWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: MessageScalarFieldEnum | MessageScalarFieldEnum[]
+  }
+
+  /**
    * Channel without action
    */
   export type ChannelDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5771,7 +5791,7 @@ export namespace Prisma {
     createdAt: 'createdAt',
     id: 'id',
     authorId: 'authorId',
-    recipientId: 'recipientId'
+    channelName: 'channelName'
   };
 
   export type MessageScalarFieldEnum = (typeof MessageScalarFieldEnum)[keyof typeof MessageScalarFieldEnum]
@@ -5950,9 +5970,9 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Message"> | Date | string
     id?: IntFilter<"Message"> | number
     authorId?: IntFilter<"Message"> | number
-    recipientId?: IntFilter<"Message"> | number
+    channelName?: StringFilter<"Message"> | string
     User_Message_authorIdToUser?: XOR<UserScalarRelationFilter, UserWhereInput>
-    User_Message_recipientIdToUser?: XOR<UserScalarRelationFilter, UserWhereInput>
+    Channel?: XOR<ChannelScalarRelationFilter, ChannelWhereInput>
   }
 
   export type MessageOrderByWithRelationInput = {
@@ -5960,9 +5980,9 @@ export namespace Prisma {
     createdAt?: SortOrder
     id?: SortOrder
     authorId?: SortOrder
-    recipientId?: SortOrder
+    channelName?: SortOrder
     User_Message_authorIdToUser?: UserOrderByWithRelationInput
-    User_Message_recipientIdToUser?: UserOrderByWithRelationInput
+    Channel?: ChannelOrderByWithRelationInput
   }
 
   export type MessageWhereUniqueInput = Prisma.AtLeast<{
@@ -5973,9 +5993,9 @@ export namespace Prisma {
     content?: StringFilter<"Message"> | string
     createdAt?: DateTimeFilter<"Message"> | Date | string
     authorId?: IntFilter<"Message"> | number
-    recipientId?: IntFilter<"Message"> | number
+    channelName?: StringFilter<"Message"> | string
     User_Message_authorIdToUser?: XOR<UserScalarRelationFilter, UserWhereInput>
-    User_Message_recipientIdToUser?: XOR<UserScalarRelationFilter, UserWhereInput>
+    Channel?: XOR<ChannelScalarRelationFilter, ChannelWhereInput>
   }, "id">
 
   export type MessageOrderByWithAggregationInput = {
@@ -5983,7 +6003,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     id?: SortOrder
     authorId?: SortOrder
-    recipientId?: SortOrder
+    channelName?: SortOrder
     _count?: MessageCountOrderByAggregateInput
     _avg?: MessageAvgOrderByAggregateInput
     _max?: MessageMaxOrderByAggregateInput
@@ -5999,7 +6019,7 @@ export namespace Prisma {
     createdAt?: DateTimeWithAggregatesFilter<"Message"> | Date | string
     id?: IntWithAggregatesFilter<"Message"> | number
     authorId?: IntWithAggregatesFilter<"Message"> | number
-    recipientId?: IntWithAggregatesFilter<"Message"> | number
+    channelName?: StringWithAggregatesFilter<"Message"> | string
   }
 
   export type UserWhereInput = {
@@ -6017,7 +6037,6 @@ export namespace Prisma {
     Friend_Friend_friendIdToUser?: FriendListRelationFilter
     Friend_Friend_userIdToUser?: FriendListRelationFilter
     Message_Message_authorIdToUser?: MessageListRelationFilter
-    Message_Message_recipientIdToUser?: MessageListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -6032,7 +6051,6 @@ export namespace Prisma {
     Friend_Friend_friendIdToUser?: FriendOrderByRelationAggregateInput
     Friend_Friend_userIdToUser?: FriendOrderByRelationAggregateInput
     Message_Message_authorIdToUser?: MessageOrderByRelationAggregateInput
-    Message_Message_recipientIdToUser?: MessageOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -6050,7 +6068,6 @@ export namespace Prisma {
     Friend_Friend_friendIdToUser?: FriendListRelationFilter
     Friend_Friend_userIdToUser?: FriendListRelationFilter
     Message_Message_authorIdToUser?: MessageListRelationFilter
-    Message_Message_recipientIdToUser?: MessageListRelationFilter
   }, "id" | "username">
 
   export type UserOrderByWithAggregationInput = {
@@ -6089,6 +6106,7 @@ export namespace Prisma {
     name?: StringFilter<"Channel"> | string
     ownerId?: IntNullableFilter<"Channel"> | number | null
     User?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+    Message?: MessageListRelationFilter
   }
 
   export type ChannelOrderByWithRelationInput = {
@@ -6096,6 +6114,7 @@ export namespace Prisma {
     name?: SortOrder
     ownerId?: SortOrderInput | SortOrder
     User?: UserOrderByWithRelationInput
+    Message?: MessageOrderByRelationAggregateInput
   }
 
   export type ChannelWhereUniqueInput = Prisma.AtLeast<{
@@ -6106,6 +6125,7 @@ export namespace Prisma {
     NOT?: ChannelWhereInput | ChannelWhereInput[]
     ownerId?: IntNullableFilter<"Channel"> | number | null
     User?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+    Message?: MessageListRelationFilter
   }, "id" | "name">
 
   export type ChannelOrderByWithAggregationInput = {
@@ -6176,7 +6196,7 @@ export namespace Prisma {
     content: string
     createdAt?: Date | string
     User_Message_authorIdToUser: UserCreateNestedOneWithoutMessage_Message_authorIdToUserInput
-    User_Message_recipientIdToUser: UserCreateNestedOneWithoutMessage_Message_recipientIdToUserInput
+    Channel: ChannelCreateNestedOneWithoutMessageInput
   }
 
   export type MessageUncheckedCreateInput = {
@@ -6184,14 +6204,14 @@ export namespace Prisma {
     createdAt?: Date | string
     id?: number
     authorId: number
-    recipientId: number
+    channelName: string
   }
 
   export type MessageUpdateInput = {
     content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     User_Message_authorIdToUser?: UserUpdateOneRequiredWithoutMessage_Message_authorIdToUserNestedInput
-    User_Message_recipientIdToUser?: UserUpdateOneRequiredWithoutMessage_Message_recipientIdToUserNestedInput
+    Channel?: ChannelUpdateOneRequiredWithoutMessageNestedInput
   }
 
   export type MessageUncheckedUpdateInput = {
@@ -6199,7 +6219,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     id?: IntFieldUpdateOperationsInput | number
     authorId?: IntFieldUpdateOperationsInput | number
-    recipientId?: IntFieldUpdateOperationsInput | number
+    channelName?: StringFieldUpdateOperationsInput | string
   }
 
   export type MessageCreateManyInput = {
@@ -6207,7 +6227,7 @@ export namespace Prisma {
     createdAt?: Date | string
     id?: number
     authorId: number
-    recipientId: number
+    channelName: string
   }
 
   export type MessageUpdateManyMutationInput = {
@@ -6220,7 +6240,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     id?: IntFieldUpdateOperationsInput | number
     authorId?: IntFieldUpdateOperationsInput | number
-    recipientId?: IntFieldUpdateOperationsInput | number
+    channelName?: StringFieldUpdateOperationsInput | string
   }
 
   export type UserCreateInput = {
@@ -6234,7 +6254,6 @@ export namespace Prisma {
     Friend_Friend_friendIdToUser?: FriendCreateNestedManyWithoutUser_Friend_friendIdToUserInput
     Friend_Friend_userIdToUser?: FriendCreateNestedManyWithoutUser_Friend_userIdToUserInput
     Message_Message_authorIdToUser?: MessageCreateNestedManyWithoutUser_Message_authorIdToUserInput
-    Message_Message_recipientIdToUser?: MessageCreateNestedManyWithoutUser_Message_recipientIdToUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -6249,7 +6268,6 @@ export namespace Prisma {
     Friend_Friend_friendIdToUser?: FriendUncheckedCreateNestedManyWithoutUser_Friend_friendIdToUserInput
     Friend_Friend_userIdToUser?: FriendUncheckedCreateNestedManyWithoutUser_Friend_userIdToUserInput
     Message_Message_authorIdToUser?: MessageUncheckedCreateNestedManyWithoutUser_Message_authorIdToUserInput
-    Message_Message_recipientIdToUser?: MessageUncheckedCreateNestedManyWithoutUser_Message_recipientIdToUserInput
   }
 
   export type UserUpdateInput = {
@@ -6263,7 +6281,6 @@ export namespace Prisma {
     Friend_Friend_friendIdToUser?: FriendUpdateManyWithoutUser_Friend_friendIdToUserNestedInput
     Friend_Friend_userIdToUser?: FriendUpdateManyWithoutUser_Friend_userIdToUserNestedInput
     Message_Message_authorIdToUser?: MessageUpdateManyWithoutUser_Message_authorIdToUserNestedInput
-    Message_Message_recipientIdToUser?: MessageUpdateManyWithoutUser_Message_recipientIdToUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -6278,7 +6295,6 @@ export namespace Prisma {
     Friend_Friend_friendIdToUser?: FriendUncheckedUpdateManyWithoutUser_Friend_friendIdToUserNestedInput
     Friend_Friend_userIdToUser?: FriendUncheckedUpdateManyWithoutUser_Friend_userIdToUserNestedInput
     Message_Message_authorIdToUser?: MessageUncheckedUpdateManyWithoutUser_Message_authorIdToUserNestedInput
-    Message_Message_recipientIdToUser?: MessageUncheckedUpdateManyWithoutUser_Message_recipientIdToUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -6313,23 +6329,27 @@ export namespace Prisma {
   export type ChannelCreateInput = {
     name: string
     User?: UserCreateNestedOneWithoutChannelInput
+    Message?: MessageCreateNestedManyWithoutChannelInput
   }
 
   export type ChannelUncheckedCreateInput = {
     id?: number
     name: string
     ownerId?: number | null
+    Message?: MessageUncheckedCreateNestedManyWithoutChannelInput
   }
 
   export type ChannelUpdateInput = {
     name?: StringFieldUpdateOperationsInput | string
     User?: UserUpdateOneWithoutChannelNestedInput
+    Message?: MessageUpdateManyWithoutChannelNestedInput
   }
 
   export type ChannelUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     ownerId?: NullableIntFieldUpdateOperationsInput | number | null
+    Message?: MessageUncheckedUpdateManyWithoutChannelNestedInput
   }
 
   export type ChannelCreateManyInput = {
@@ -6453,18 +6473,22 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
+  export type ChannelScalarRelationFilter = {
+    is?: ChannelWhereInput
+    isNot?: ChannelWhereInput
+  }
+
   export type MessageCountOrderByAggregateInput = {
     content?: SortOrder
     createdAt?: SortOrder
     id?: SortOrder
     authorId?: SortOrder
-    recipientId?: SortOrder
+    channelName?: SortOrder
   }
 
   export type MessageAvgOrderByAggregateInput = {
     id?: SortOrder
     authorId?: SortOrder
-    recipientId?: SortOrder
   }
 
   export type MessageMaxOrderByAggregateInput = {
@@ -6472,7 +6496,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     id?: SortOrder
     authorId?: SortOrder
-    recipientId?: SortOrder
+    channelName?: SortOrder
   }
 
   export type MessageMinOrderByAggregateInput = {
@@ -6480,13 +6504,12 @@ export namespace Prisma {
     createdAt?: SortOrder
     id?: SortOrder
     authorId?: SortOrder
-    recipientId?: SortOrder
+    channelName?: SortOrder
   }
 
   export type MessageSumOrderByAggregateInput = {
     id?: SortOrder
     authorId?: SortOrder
-    recipientId?: SortOrder
   }
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
@@ -6719,10 +6742,10 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput
   }
 
-  export type UserCreateNestedOneWithoutMessage_Message_recipientIdToUserInput = {
-    create?: XOR<UserCreateWithoutMessage_Message_recipientIdToUserInput, UserUncheckedCreateWithoutMessage_Message_recipientIdToUserInput>
-    connectOrCreate?: UserCreateOrConnectWithoutMessage_Message_recipientIdToUserInput
-    connect?: UserWhereUniqueInput
+  export type ChannelCreateNestedOneWithoutMessageInput = {
+    create?: XOR<ChannelCreateWithoutMessageInput, ChannelUncheckedCreateWithoutMessageInput>
+    connectOrCreate?: ChannelCreateOrConnectWithoutMessageInput
+    connect?: ChannelWhereUniqueInput
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -6737,12 +6760,12 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutMessage_Message_authorIdToUserInput, UserUpdateWithoutMessage_Message_authorIdToUserInput>, UserUncheckedUpdateWithoutMessage_Message_authorIdToUserInput>
   }
 
-  export type UserUpdateOneRequiredWithoutMessage_Message_recipientIdToUserNestedInput = {
-    create?: XOR<UserCreateWithoutMessage_Message_recipientIdToUserInput, UserUncheckedCreateWithoutMessage_Message_recipientIdToUserInput>
-    connectOrCreate?: UserCreateOrConnectWithoutMessage_Message_recipientIdToUserInput
-    upsert?: UserUpsertWithoutMessage_Message_recipientIdToUserInput
-    connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutMessage_Message_recipientIdToUserInput, UserUpdateWithoutMessage_Message_recipientIdToUserInput>, UserUncheckedUpdateWithoutMessage_Message_recipientIdToUserInput>
+  export type ChannelUpdateOneRequiredWithoutMessageNestedInput = {
+    create?: XOR<ChannelCreateWithoutMessageInput, ChannelUncheckedCreateWithoutMessageInput>
+    connectOrCreate?: ChannelCreateOrConnectWithoutMessageInput
+    upsert?: ChannelUpsertWithoutMessageInput
+    connect?: ChannelWhereUniqueInput
+    update?: XOR<XOR<ChannelUpdateToOneWithWhereWithoutMessageInput, ChannelUpdateWithoutMessageInput>, ChannelUncheckedUpdateWithoutMessageInput>
   }
 
   export type ChannelCreateNestedManyWithoutUserInput = {
@@ -6773,13 +6796,6 @@ export namespace Prisma {
     connect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
   }
 
-  export type MessageCreateNestedManyWithoutUser_Message_recipientIdToUserInput = {
-    create?: XOR<MessageCreateWithoutUser_Message_recipientIdToUserInput, MessageUncheckedCreateWithoutUser_Message_recipientIdToUserInput> | MessageCreateWithoutUser_Message_recipientIdToUserInput[] | MessageUncheckedCreateWithoutUser_Message_recipientIdToUserInput[]
-    connectOrCreate?: MessageCreateOrConnectWithoutUser_Message_recipientIdToUserInput | MessageCreateOrConnectWithoutUser_Message_recipientIdToUserInput[]
-    createMany?: MessageCreateManyUser_Message_recipientIdToUserInputEnvelope
-    connect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
-  }
-
   export type ChannelUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<ChannelCreateWithoutUserInput, ChannelUncheckedCreateWithoutUserInput> | ChannelCreateWithoutUserInput[] | ChannelUncheckedCreateWithoutUserInput[]
     connectOrCreate?: ChannelCreateOrConnectWithoutUserInput | ChannelCreateOrConnectWithoutUserInput[]
@@ -6805,13 +6821,6 @@ export namespace Prisma {
     create?: XOR<MessageCreateWithoutUser_Message_authorIdToUserInput, MessageUncheckedCreateWithoutUser_Message_authorIdToUserInput> | MessageCreateWithoutUser_Message_authorIdToUserInput[] | MessageUncheckedCreateWithoutUser_Message_authorIdToUserInput[]
     connectOrCreate?: MessageCreateOrConnectWithoutUser_Message_authorIdToUserInput | MessageCreateOrConnectWithoutUser_Message_authorIdToUserInput[]
     createMany?: MessageCreateManyUser_Message_authorIdToUserInputEnvelope
-    connect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
-  }
-
-  export type MessageUncheckedCreateNestedManyWithoutUser_Message_recipientIdToUserInput = {
-    create?: XOR<MessageCreateWithoutUser_Message_recipientIdToUserInput, MessageUncheckedCreateWithoutUser_Message_recipientIdToUserInput> | MessageCreateWithoutUser_Message_recipientIdToUserInput[] | MessageUncheckedCreateWithoutUser_Message_recipientIdToUserInput[]
-    connectOrCreate?: MessageCreateOrConnectWithoutUser_Message_recipientIdToUserInput | MessageCreateOrConnectWithoutUser_Message_recipientIdToUserInput[]
-    createMany?: MessageCreateManyUser_Message_recipientIdToUserInputEnvelope
     connect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
   }
 
@@ -6875,20 +6884,6 @@ export namespace Prisma {
     deleteMany?: MessageScalarWhereInput | MessageScalarWhereInput[]
   }
 
-  export type MessageUpdateManyWithoutUser_Message_recipientIdToUserNestedInput = {
-    create?: XOR<MessageCreateWithoutUser_Message_recipientIdToUserInput, MessageUncheckedCreateWithoutUser_Message_recipientIdToUserInput> | MessageCreateWithoutUser_Message_recipientIdToUserInput[] | MessageUncheckedCreateWithoutUser_Message_recipientIdToUserInput[]
-    connectOrCreate?: MessageCreateOrConnectWithoutUser_Message_recipientIdToUserInput | MessageCreateOrConnectWithoutUser_Message_recipientIdToUserInput[]
-    upsert?: MessageUpsertWithWhereUniqueWithoutUser_Message_recipientIdToUserInput | MessageUpsertWithWhereUniqueWithoutUser_Message_recipientIdToUserInput[]
-    createMany?: MessageCreateManyUser_Message_recipientIdToUserInputEnvelope
-    set?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
-    disconnect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
-    delete?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
-    connect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
-    update?: MessageUpdateWithWhereUniqueWithoutUser_Message_recipientIdToUserInput | MessageUpdateWithWhereUniqueWithoutUser_Message_recipientIdToUserInput[]
-    updateMany?: MessageUpdateManyWithWhereWithoutUser_Message_recipientIdToUserInput | MessageUpdateManyWithWhereWithoutUser_Message_recipientIdToUserInput[]
-    deleteMany?: MessageScalarWhereInput | MessageScalarWhereInput[]
-  }
-
   export type ChannelUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<ChannelCreateWithoutUserInput, ChannelUncheckedCreateWithoutUserInput> | ChannelCreateWithoutUserInput[] | ChannelUncheckedCreateWithoutUserInput[]
     connectOrCreate?: ChannelCreateOrConnectWithoutUserInput | ChannelCreateOrConnectWithoutUserInput[]
@@ -6945,24 +6940,24 @@ export namespace Prisma {
     deleteMany?: MessageScalarWhereInput | MessageScalarWhereInput[]
   }
 
-  export type MessageUncheckedUpdateManyWithoutUser_Message_recipientIdToUserNestedInput = {
-    create?: XOR<MessageCreateWithoutUser_Message_recipientIdToUserInput, MessageUncheckedCreateWithoutUser_Message_recipientIdToUserInput> | MessageCreateWithoutUser_Message_recipientIdToUserInput[] | MessageUncheckedCreateWithoutUser_Message_recipientIdToUserInput[]
-    connectOrCreate?: MessageCreateOrConnectWithoutUser_Message_recipientIdToUserInput | MessageCreateOrConnectWithoutUser_Message_recipientIdToUserInput[]
-    upsert?: MessageUpsertWithWhereUniqueWithoutUser_Message_recipientIdToUserInput | MessageUpsertWithWhereUniqueWithoutUser_Message_recipientIdToUserInput[]
-    createMany?: MessageCreateManyUser_Message_recipientIdToUserInputEnvelope
-    set?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
-    disconnect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
-    delete?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
-    connect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
-    update?: MessageUpdateWithWhereUniqueWithoutUser_Message_recipientIdToUserInput | MessageUpdateWithWhereUniqueWithoutUser_Message_recipientIdToUserInput[]
-    updateMany?: MessageUpdateManyWithWhereWithoutUser_Message_recipientIdToUserInput | MessageUpdateManyWithWhereWithoutUser_Message_recipientIdToUserInput[]
-    deleteMany?: MessageScalarWhereInput | MessageScalarWhereInput[]
-  }
-
   export type UserCreateNestedOneWithoutChannelInput = {
     create?: XOR<UserCreateWithoutChannelInput, UserUncheckedCreateWithoutChannelInput>
     connectOrCreate?: UserCreateOrConnectWithoutChannelInput
     connect?: UserWhereUniqueInput
+  }
+
+  export type MessageCreateNestedManyWithoutChannelInput = {
+    create?: XOR<MessageCreateWithoutChannelInput, MessageUncheckedCreateWithoutChannelInput> | MessageCreateWithoutChannelInput[] | MessageUncheckedCreateWithoutChannelInput[]
+    connectOrCreate?: MessageCreateOrConnectWithoutChannelInput | MessageCreateOrConnectWithoutChannelInput[]
+    createMany?: MessageCreateManyChannelInputEnvelope
+    connect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+  }
+
+  export type MessageUncheckedCreateNestedManyWithoutChannelInput = {
+    create?: XOR<MessageCreateWithoutChannelInput, MessageUncheckedCreateWithoutChannelInput> | MessageCreateWithoutChannelInput[] | MessageUncheckedCreateWithoutChannelInput[]
+    connectOrCreate?: MessageCreateOrConnectWithoutChannelInput | MessageCreateOrConnectWithoutChannelInput[]
+    createMany?: MessageCreateManyChannelInputEnvelope
+    connect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
   }
 
   export type UserUpdateOneWithoutChannelNestedInput = {
@@ -6975,12 +6970,40 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutChannelInput, UserUpdateWithoutChannelInput>, UserUncheckedUpdateWithoutChannelInput>
   }
 
+  export type MessageUpdateManyWithoutChannelNestedInput = {
+    create?: XOR<MessageCreateWithoutChannelInput, MessageUncheckedCreateWithoutChannelInput> | MessageCreateWithoutChannelInput[] | MessageUncheckedCreateWithoutChannelInput[]
+    connectOrCreate?: MessageCreateOrConnectWithoutChannelInput | MessageCreateOrConnectWithoutChannelInput[]
+    upsert?: MessageUpsertWithWhereUniqueWithoutChannelInput | MessageUpsertWithWhereUniqueWithoutChannelInput[]
+    createMany?: MessageCreateManyChannelInputEnvelope
+    set?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+    disconnect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+    delete?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+    connect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+    update?: MessageUpdateWithWhereUniqueWithoutChannelInput | MessageUpdateWithWhereUniqueWithoutChannelInput[]
+    updateMany?: MessageUpdateManyWithWhereWithoutChannelInput | MessageUpdateManyWithWhereWithoutChannelInput[]
+    deleteMany?: MessageScalarWhereInput | MessageScalarWhereInput[]
+  }
+
   export type NullableIntFieldUpdateOperationsInput = {
     set?: number | null
     increment?: number
     decrement?: number
     multiply?: number
     divide?: number
+  }
+
+  export type MessageUncheckedUpdateManyWithoutChannelNestedInput = {
+    create?: XOR<MessageCreateWithoutChannelInput, MessageUncheckedCreateWithoutChannelInput> | MessageCreateWithoutChannelInput[] | MessageUncheckedCreateWithoutChannelInput[]
+    connectOrCreate?: MessageCreateOrConnectWithoutChannelInput | MessageCreateOrConnectWithoutChannelInput[]
+    upsert?: MessageUpsertWithWhereUniqueWithoutChannelInput | MessageUpsertWithWhereUniqueWithoutChannelInput[]
+    createMany?: MessageCreateManyChannelInputEnvelope
+    set?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+    disconnect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+    delete?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+    connect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+    update?: MessageUpdateWithWhereUniqueWithoutChannelInput | MessageUpdateWithWhereUniqueWithoutChannelInput[]
+    updateMany?: MessageUpdateManyWithWhereWithoutChannelInput | MessageUpdateManyWithWhereWithoutChannelInput[]
+    deleteMany?: MessageScalarWhereInput | MessageScalarWhereInput[]
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -7156,7 +7179,6 @@ export namespace Prisma {
     Channel?: ChannelCreateNestedManyWithoutUserInput
     Friend_Friend_userIdToUser?: FriendCreateNestedManyWithoutUser_Friend_userIdToUserInput
     Message_Message_authorIdToUser?: MessageCreateNestedManyWithoutUser_Message_authorIdToUserInput
-    Message_Message_recipientIdToUser?: MessageCreateNestedManyWithoutUser_Message_recipientIdToUserInput
   }
 
   export type UserUncheckedCreateWithoutFriend_Friend_friendIdToUserInput = {
@@ -7170,7 +7192,6 @@ export namespace Prisma {
     Channel?: ChannelUncheckedCreateNestedManyWithoutUserInput
     Friend_Friend_userIdToUser?: FriendUncheckedCreateNestedManyWithoutUser_Friend_userIdToUserInput
     Message_Message_authorIdToUser?: MessageUncheckedCreateNestedManyWithoutUser_Message_authorIdToUserInput
-    Message_Message_recipientIdToUser?: MessageUncheckedCreateNestedManyWithoutUser_Message_recipientIdToUserInput
   }
 
   export type UserCreateOrConnectWithoutFriend_Friend_friendIdToUserInput = {
@@ -7188,7 +7209,6 @@ export namespace Prisma {
     Channel?: ChannelCreateNestedManyWithoutUserInput
     Friend_Friend_friendIdToUser?: FriendCreateNestedManyWithoutUser_Friend_friendIdToUserInput
     Message_Message_authorIdToUser?: MessageCreateNestedManyWithoutUser_Message_authorIdToUserInput
-    Message_Message_recipientIdToUser?: MessageCreateNestedManyWithoutUser_Message_recipientIdToUserInput
   }
 
   export type UserUncheckedCreateWithoutFriend_Friend_userIdToUserInput = {
@@ -7202,7 +7222,6 @@ export namespace Prisma {
     Channel?: ChannelUncheckedCreateNestedManyWithoutUserInput
     Friend_Friend_friendIdToUser?: FriendUncheckedCreateNestedManyWithoutUser_Friend_friendIdToUserInput
     Message_Message_authorIdToUser?: MessageUncheckedCreateNestedManyWithoutUser_Message_authorIdToUserInput
-    Message_Message_recipientIdToUser?: MessageUncheckedCreateNestedManyWithoutUser_Message_recipientIdToUserInput
   }
 
   export type UserCreateOrConnectWithoutFriend_Friend_userIdToUserInput = {
@@ -7231,7 +7250,6 @@ export namespace Prisma {
     Channel?: ChannelUpdateManyWithoutUserNestedInput
     Friend_Friend_userIdToUser?: FriendUpdateManyWithoutUser_Friend_userIdToUserNestedInput
     Message_Message_authorIdToUser?: MessageUpdateManyWithoutUser_Message_authorIdToUserNestedInput
-    Message_Message_recipientIdToUser?: MessageUpdateManyWithoutUser_Message_recipientIdToUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutFriend_Friend_friendIdToUserInput = {
@@ -7245,7 +7263,6 @@ export namespace Prisma {
     Channel?: ChannelUncheckedUpdateManyWithoutUserNestedInput
     Friend_Friend_userIdToUser?: FriendUncheckedUpdateManyWithoutUser_Friend_userIdToUserNestedInput
     Message_Message_authorIdToUser?: MessageUncheckedUpdateManyWithoutUser_Message_authorIdToUserNestedInput
-    Message_Message_recipientIdToUser?: MessageUncheckedUpdateManyWithoutUser_Message_recipientIdToUserNestedInput
   }
 
   export type UserUpsertWithoutFriend_Friend_userIdToUserInput = {
@@ -7269,7 +7286,6 @@ export namespace Prisma {
     Channel?: ChannelUpdateManyWithoutUserNestedInput
     Friend_Friend_friendIdToUser?: FriendUpdateManyWithoutUser_Friend_friendIdToUserNestedInput
     Message_Message_authorIdToUser?: MessageUpdateManyWithoutUser_Message_authorIdToUserNestedInput
-    Message_Message_recipientIdToUser?: MessageUpdateManyWithoutUser_Message_recipientIdToUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutFriend_Friend_userIdToUserInput = {
@@ -7283,7 +7299,6 @@ export namespace Prisma {
     Channel?: ChannelUncheckedUpdateManyWithoutUserNestedInput
     Friend_Friend_friendIdToUser?: FriendUncheckedUpdateManyWithoutUser_Friend_friendIdToUserNestedInput
     Message_Message_authorIdToUser?: MessageUncheckedUpdateManyWithoutUser_Message_authorIdToUserNestedInput
-    Message_Message_recipientIdToUser?: MessageUncheckedUpdateManyWithoutUser_Message_recipientIdToUserNestedInput
   }
 
   export type UserCreateWithoutMessage_Message_authorIdToUserInput = {
@@ -7296,7 +7311,6 @@ export namespace Prisma {
     Channel?: ChannelCreateNestedManyWithoutUserInput
     Friend_Friend_friendIdToUser?: FriendCreateNestedManyWithoutUser_Friend_friendIdToUserInput
     Friend_Friend_userIdToUser?: FriendCreateNestedManyWithoutUser_Friend_userIdToUserInput
-    Message_Message_recipientIdToUser?: MessageCreateNestedManyWithoutUser_Message_recipientIdToUserInput
   }
 
   export type UserUncheckedCreateWithoutMessage_Message_authorIdToUserInput = {
@@ -7310,7 +7324,6 @@ export namespace Prisma {
     Channel?: ChannelUncheckedCreateNestedManyWithoutUserInput
     Friend_Friend_friendIdToUser?: FriendUncheckedCreateNestedManyWithoutUser_Friend_friendIdToUserInput
     Friend_Friend_userIdToUser?: FriendUncheckedCreateNestedManyWithoutUser_Friend_userIdToUserInput
-    Message_Message_recipientIdToUser?: MessageUncheckedCreateNestedManyWithoutUser_Message_recipientIdToUserInput
   }
 
   export type UserCreateOrConnectWithoutMessage_Message_authorIdToUserInput = {
@@ -7318,36 +7331,20 @@ export namespace Prisma {
     create: XOR<UserCreateWithoutMessage_Message_authorIdToUserInput, UserUncheckedCreateWithoutMessage_Message_authorIdToUserInput>
   }
 
-  export type UserCreateWithoutMessage_Message_recipientIdToUserInput = {
-    avatarUrl?: string | null
-    createdAt?: Date | string
-    displayName?: string | null
-    passwordHash: string
-    passwordSalt: string
-    username: string
-    Channel?: ChannelCreateNestedManyWithoutUserInput
-    Friend_Friend_friendIdToUser?: FriendCreateNestedManyWithoutUser_Friend_friendIdToUserInput
-    Friend_Friend_userIdToUser?: FriendCreateNestedManyWithoutUser_Friend_userIdToUserInput
-    Message_Message_authorIdToUser?: MessageCreateNestedManyWithoutUser_Message_authorIdToUserInput
+  export type ChannelCreateWithoutMessageInput = {
+    name: string
+    User?: UserCreateNestedOneWithoutChannelInput
   }
 
-  export type UserUncheckedCreateWithoutMessage_Message_recipientIdToUserInput = {
-    avatarUrl?: string | null
-    createdAt?: Date | string
-    displayName?: string | null
-    passwordHash: string
-    passwordSalt: string
-    username: string
+  export type ChannelUncheckedCreateWithoutMessageInput = {
     id?: number
-    Channel?: ChannelUncheckedCreateNestedManyWithoutUserInput
-    Friend_Friend_friendIdToUser?: FriendUncheckedCreateNestedManyWithoutUser_Friend_friendIdToUserInput
-    Friend_Friend_userIdToUser?: FriendUncheckedCreateNestedManyWithoutUser_Friend_userIdToUserInput
-    Message_Message_authorIdToUser?: MessageUncheckedCreateNestedManyWithoutUser_Message_authorIdToUserInput
+    name: string
+    ownerId?: number | null
   }
 
-  export type UserCreateOrConnectWithoutMessage_Message_recipientIdToUserInput = {
-    where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutMessage_Message_recipientIdToUserInput, UserUncheckedCreateWithoutMessage_Message_recipientIdToUserInput>
+  export type ChannelCreateOrConnectWithoutMessageInput = {
+    where: ChannelWhereUniqueInput
+    create: XOR<ChannelCreateWithoutMessageInput, ChannelUncheckedCreateWithoutMessageInput>
   }
 
   export type UserUpsertWithoutMessage_Message_authorIdToUserInput = {
@@ -7371,7 +7368,6 @@ export namespace Prisma {
     Channel?: ChannelUpdateManyWithoutUserNestedInput
     Friend_Friend_friendIdToUser?: FriendUpdateManyWithoutUser_Friend_friendIdToUserNestedInput
     Friend_Friend_userIdToUser?: FriendUpdateManyWithoutUser_Friend_userIdToUserNestedInput
-    Message_Message_recipientIdToUser?: MessageUpdateManyWithoutUser_Message_recipientIdToUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutMessage_Message_authorIdToUserInput = {
@@ -7385,54 +7381,39 @@ export namespace Prisma {
     Channel?: ChannelUncheckedUpdateManyWithoutUserNestedInput
     Friend_Friend_friendIdToUser?: FriendUncheckedUpdateManyWithoutUser_Friend_friendIdToUserNestedInput
     Friend_Friend_userIdToUser?: FriendUncheckedUpdateManyWithoutUser_Friend_userIdToUserNestedInput
-    Message_Message_recipientIdToUser?: MessageUncheckedUpdateManyWithoutUser_Message_recipientIdToUserNestedInput
   }
 
-  export type UserUpsertWithoutMessage_Message_recipientIdToUserInput = {
-    update: XOR<UserUpdateWithoutMessage_Message_recipientIdToUserInput, UserUncheckedUpdateWithoutMessage_Message_recipientIdToUserInput>
-    create: XOR<UserCreateWithoutMessage_Message_recipientIdToUserInput, UserUncheckedCreateWithoutMessage_Message_recipientIdToUserInput>
-    where?: UserWhereInput
+  export type ChannelUpsertWithoutMessageInput = {
+    update: XOR<ChannelUpdateWithoutMessageInput, ChannelUncheckedUpdateWithoutMessageInput>
+    create: XOR<ChannelCreateWithoutMessageInput, ChannelUncheckedCreateWithoutMessageInput>
+    where?: ChannelWhereInput
   }
 
-  export type UserUpdateToOneWithWhereWithoutMessage_Message_recipientIdToUserInput = {
-    where?: UserWhereInput
-    data: XOR<UserUpdateWithoutMessage_Message_recipientIdToUserInput, UserUncheckedUpdateWithoutMessage_Message_recipientIdToUserInput>
+  export type ChannelUpdateToOneWithWhereWithoutMessageInput = {
+    where?: ChannelWhereInput
+    data: XOR<ChannelUpdateWithoutMessageInput, ChannelUncheckedUpdateWithoutMessageInput>
   }
 
-  export type UserUpdateWithoutMessage_Message_recipientIdToUserInput = {
-    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    displayName?: NullableStringFieldUpdateOperationsInput | string | null
-    passwordHash?: StringFieldUpdateOperationsInput | string
-    passwordSalt?: StringFieldUpdateOperationsInput | string
-    username?: StringFieldUpdateOperationsInput | string
-    Channel?: ChannelUpdateManyWithoutUserNestedInput
-    Friend_Friend_friendIdToUser?: FriendUpdateManyWithoutUser_Friend_friendIdToUserNestedInput
-    Friend_Friend_userIdToUser?: FriendUpdateManyWithoutUser_Friend_userIdToUserNestedInput
-    Message_Message_authorIdToUser?: MessageUpdateManyWithoutUser_Message_authorIdToUserNestedInput
+  export type ChannelUpdateWithoutMessageInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    User?: UserUpdateOneWithoutChannelNestedInput
   }
 
-  export type UserUncheckedUpdateWithoutMessage_Message_recipientIdToUserInput = {
-    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    displayName?: NullableStringFieldUpdateOperationsInput | string | null
-    passwordHash?: StringFieldUpdateOperationsInput | string
-    passwordSalt?: StringFieldUpdateOperationsInput | string
-    username?: StringFieldUpdateOperationsInput | string
+  export type ChannelUncheckedUpdateWithoutMessageInput = {
     id?: IntFieldUpdateOperationsInput | number
-    Channel?: ChannelUncheckedUpdateManyWithoutUserNestedInput
-    Friend_Friend_friendIdToUser?: FriendUncheckedUpdateManyWithoutUser_Friend_friendIdToUserNestedInput
-    Friend_Friend_userIdToUser?: FriendUncheckedUpdateManyWithoutUser_Friend_userIdToUserNestedInput
-    Message_Message_authorIdToUser?: MessageUncheckedUpdateManyWithoutUser_Message_authorIdToUserNestedInput
+    name?: StringFieldUpdateOperationsInput | string
+    ownerId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type ChannelCreateWithoutUserInput = {
     name: string
+    Message?: MessageCreateNestedManyWithoutChannelInput
   }
 
   export type ChannelUncheckedCreateWithoutUserInput = {
     id?: number
     name: string
+    Message?: MessageUncheckedCreateNestedManyWithoutChannelInput
   }
 
   export type ChannelCreateOrConnectWithoutUserInput = {
@@ -7490,14 +7471,14 @@ export namespace Prisma {
   export type MessageCreateWithoutUser_Message_authorIdToUserInput = {
     content: string
     createdAt?: Date | string
-    User_Message_recipientIdToUser: UserCreateNestedOneWithoutMessage_Message_recipientIdToUserInput
+    Channel: ChannelCreateNestedOneWithoutMessageInput
   }
 
   export type MessageUncheckedCreateWithoutUser_Message_authorIdToUserInput = {
     content: string
     createdAt?: Date | string
     id?: number
-    recipientId: number
+    channelName: string
   }
 
   export type MessageCreateOrConnectWithoutUser_Message_authorIdToUserInput = {
@@ -7507,29 +7488,6 @@ export namespace Prisma {
 
   export type MessageCreateManyUser_Message_authorIdToUserInputEnvelope = {
     data: MessageCreateManyUser_Message_authorIdToUserInput | MessageCreateManyUser_Message_authorIdToUserInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type MessageCreateWithoutUser_Message_recipientIdToUserInput = {
-    content: string
-    createdAt?: Date | string
-    User_Message_authorIdToUser: UserCreateNestedOneWithoutMessage_Message_authorIdToUserInput
-  }
-
-  export type MessageUncheckedCreateWithoutUser_Message_recipientIdToUserInput = {
-    content: string
-    createdAt?: Date | string
-    id?: number
-    authorId: number
-  }
-
-  export type MessageCreateOrConnectWithoutUser_Message_recipientIdToUserInput = {
-    where: MessageWhereUniqueInput
-    create: XOR<MessageCreateWithoutUser_Message_recipientIdToUserInput, MessageUncheckedCreateWithoutUser_Message_recipientIdToUserInput>
-  }
-
-  export type MessageCreateManyUser_Message_recipientIdToUserInputEnvelope = {
-    data: MessageCreateManyUser_Message_recipientIdToUserInput | MessageCreateManyUser_Message_recipientIdToUserInput[]
     skipDuplicates?: boolean
   }
 
@@ -7624,23 +7582,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Message"> | Date | string
     id?: IntFilter<"Message"> | number
     authorId?: IntFilter<"Message"> | number
-    recipientId?: IntFilter<"Message"> | number
-  }
-
-  export type MessageUpsertWithWhereUniqueWithoutUser_Message_recipientIdToUserInput = {
-    where: MessageWhereUniqueInput
-    update: XOR<MessageUpdateWithoutUser_Message_recipientIdToUserInput, MessageUncheckedUpdateWithoutUser_Message_recipientIdToUserInput>
-    create: XOR<MessageCreateWithoutUser_Message_recipientIdToUserInput, MessageUncheckedCreateWithoutUser_Message_recipientIdToUserInput>
-  }
-
-  export type MessageUpdateWithWhereUniqueWithoutUser_Message_recipientIdToUserInput = {
-    where: MessageWhereUniqueInput
-    data: XOR<MessageUpdateWithoutUser_Message_recipientIdToUserInput, MessageUncheckedUpdateWithoutUser_Message_recipientIdToUserInput>
-  }
-
-  export type MessageUpdateManyWithWhereWithoutUser_Message_recipientIdToUserInput = {
-    where: MessageScalarWhereInput
-    data: XOR<MessageUpdateManyMutationInput, MessageUncheckedUpdateManyWithoutUser_Message_recipientIdToUserInput>
+    channelName?: StringFilter<"Message"> | string
   }
 
   export type UserCreateWithoutChannelInput = {
@@ -7653,7 +7595,6 @@ export namespace Prisma {
     Friend_Friend_friendIdToUser?: FriendCreateNestedManyWithoutUser_Friend_friendIdToUserInput
     Friend_Friend_userIdToUser?: FriendCreateNestedManyWithoutUser_Friend_userIdToUserInput
     Message_Message_authorIdToUser?: MessageCreateNestedManyWithoutUser_Message_authorIdToUserInput
-    Message_Message_recipientIdToUser?: MessageCreateNestedManyWithoutUser_Message_recipientIdToUserInput
   }
 
   export type UserUncheckedCreateWithoutChannelInput = {
@@ -7667,12 +7608,34 @@ export namespace Prisma {
     Friend_Friend_friendIdToUser?: FriendUncheckedCreateNestedManyWithoutUser_Friend_friendIdToUserInput
     Friend_Friend_userIdToUser?: FriendUncheckedCreateNestedManyWithoutUser_Friend_userIdToUserInput
     Message_Message_authorIdToUser?: MessageUncheckedCreateNestedManyWithoutUser_Message_authorIdToUserInput
-    Message_Message_recipientIdToUser?: MessageUncheckedCreateNestedManyWithoutUser_Message_recipientIdToUserInput
   }
 
   export type UserCreateOrConnectWithoutChannelInput = {
     where: UserWhereUniqueInput
     create: XOR<UserCreateWithoutChannelInput, UserUncheckedCreateWithoutChannelInput>
+  }
+
+  export type MessageCreateWithoutChannelInput = {
+    content: string
+    createdAt?: Date | string
+    User_Message_authorIdToUser: UserCreateNestedOneWithoutMessage_Message_authorIdToUserInput
+  }
+
+  export type MessageUncheckedCreateWithoutChannelInput = {
+    content: string
+    createdAt?: Date | string
+    id?: number
+    authorId: number
+  }
+
+  export type MessageCreateOrConnectWithoutChannelInput = {
+    where: MessageWhereUniqueInput
+    create: XOR<MessageCreateWithoutChannelInput, MessageUncheckedCreateWithoutChannelInput>
+  }
+
+  export type MessageCreateManyChannelInputEnvelope = {
+    data: MessageCreateManyChannelInput | MessageCreateManyChannelInput[]
+    skipDuplicates?: boolean
   }
 
   export type UserUpsertWithoutChannelInput = {
@@ -7696,7 +7659,6 @@ export namespace Prisma {
     Friend_Friend_friendIdToUser?: FriendUpdateManyWithoutUser_Friend_friendIdToUserNestedInput
     Friend_Friend_userIdToUser?: FriendUpdateManyWithoutUser_Friend_userIdToUserNestedInput
     Message_Message_authorIdToUser?: MessageUpdateManyWithoutUser_Message_authorIdToUserNestedInput
-    Message_Message_recipientIdToUser?: MessageUpdateManyWithoutUser_Message_recipientIdToUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutChannelInput = {
@@ -7710,7 +7672,22 @@ export namespace Prisma {
     Friend_Friend_friendIdToUser?: FriendUncheckedUpdateManyWithoutUser_Friend_friendIdToUserNestedInput
     Friend_Friend_userIdToUser?: FriendUncheckedUpdateManyWithoutUser_Friend_userIdToUserNestedInput
     Message_Message_authorIdToUser?: MessageUncheckedUpdateManyWithoutUser_Message_authorIdToUserNestedInput
-    Message_Message_recipientIdToUser?: MessageUncheckedUpdateManyWithoutUser_Message_recipientIdToUserNestedInput
+  }
+
+  export type MessageUpsertWithWhereUniqueWithoutChannelInput = {
+    where: MessageWhereUniqueInput
+    update: XOR<MessageUpdateWithoutChannelInput, MessageUncheckedUpdateWithoutChannelInput>
+    create: XOR<MessageCreateWithoutChannelInput, MessageUncheckedCreateWithoutChannelInput>
+  }
+
+  export type MessageUpdateWithWhereUniqueWithoutChannelInput = {
+    where: MessageWhereUniqueInput
+    data: XOR<MessageUpdateWithoutChannelInput, MessageUncheckedUpdateWithoutChannelInput>
+  }
+
+  export type MessageUpdateManyWithWhereWithoutChannelInput = {
+    where: MessageScalarWhereInput
+    data: XOR<MessageUpdateManyMutationInput, MessageUncheckedUpdateManyWithoutChannelInput>
   }
 
   export type ChannelCreateManyUserInput = {
@@ -7734,23 +7711,18 @@ export namespace Prisma {
     content: string
     createdAt?: Date | string
     id?: number
-    recipientId: number
-  }
-
-  export type MessageCreateManyUser_Message_recipientIdToUserInput = {
-    content: string
-    createdAt?: Date | string
-    id?: number
-    authorId: number
+    channelName: string
   }
 
   export type ChannelUpdateWithoutUserInput = {
     name?: StringFieldUpdateOperationsInput | string
+    Message?: MessageUpdateManyWithoutChannelNestedInput
   }
 
   export type ChannelUncheckedUpdateWithoutUserInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
+    Message?: MessageUncheckedUpdateManyWithoutChannelNestedInput
   }
 
   export type ChannelUncheckedUpdateManyWithoutUserInput = {
@@ -7795,37 +7767,44 @@ export namespace Prisma {
   export type MessageUpdateWithoutUser_Message_authorIdToUserInput = {
     content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    User_Message_recipientIdToUser?: UserUpdateOneRequiredWithoutMessage_Message_recipientIdToUserNestedInput
+    Channel?: ChannelUpdateOneRequiredWithoutMessageNestedInput
   }
 
   export type MessageUncheckedUpdateWithoutUser_Message_authorIdToUserInput = {
     content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     id?: IntFieldUpdateOperationsInput | number
-    recipientId?: IntFieldUpdateOperationsInput | number
+    channelName?: StringFieldUpdateOperationsInput | string
   }
 
   export type MessageUncheckedUpdateManyWithoutUser_Message_authorIdToUserInput = {
     content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     id?: IntFieldUpdateOperationsInput | number
-    recipientId?: IntFieldUpdateOperationsInput | number
+    channelName?: StringFieldUpdateOperationsInput | string
   }
 
-  export type MessageUpdateWithoutUser_Message_recipientIdToUserInput = {
+  export type MessageCreateManyChannelInput = {
+    content: string
+    createdAt?: Date | string
+    id?: number
+    authorId: number
+  }
+
+  export type MessageUpdateWithoutChannelInput = {
     content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     User_Message_authorIdToUser?: UserUpdateOneRequiredWithoutMessage_Message_authorIdToUserNestedInput
   }
 
-  export type MessageUncheckedUpdateWithoutUser_Message_recipientIdToUserInput = {
+  export type MessageUncheckedUpdateWithoutChannelInput = {
     content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     id?: IntFieldUpdateOperationsInput | number
     authorId?: IntFieldUpdateOperationsInput | number
   }
 
-  export type MessageUncheckedUpdateManyWithoutUser_Message_recipientIdToUserInput = {
+  export type MessageUncheckedUpdateManyWithoutChannelInput = {
     content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     id?: IntFieldUpdateOperationsInput | number

@@ -22,32 +22,25 @@ const USER_SOCKETS_MAP = new Map();
 io.on('connection', socket => {
     console.log('a user connected');
 
-    socket.on('authenticate', async accessToken => {
+    socket.on('authenticate', async ({ accessToken, channelName }) => {
         const user = await getUserFromAccessToken(accessToken);
         if (user) {
             SOCKET_USER_MAP.set(socket.id, user);
             if (!USER_SOCKETS_MAP.has(user.id)) USER_SOCKETS_MAP.set(user.id, []);
             USER_SOCKETS_MAP.get(user.id).push(socket);
         }
+
+        socket.join(channelName);
     });
 
     socket.on('chat message', async data => {
-        const { accessToken, userId, message } = data;
+        const { accessToken, channelName, message } = data;
         const user = await getUserFromAccessToken(accessToken);
-        console.log(accessToken, userId, message, user.id);
-        if (!user || user.id === userId) return socket.emit('error', 'An error occurred');
-        const recipientUser = await prisma.user.findUnique({
-            where: {
-                id: userId,
-            },
-        });
-
-        if (!recipientUser) return socket.emit('error', 'This user does not exist');
-
+        if (!user) return socket.emit('error', 'An error occurred');
         const newMessage = await prisma.message.create({
             data: {
                 authorId: user.id,
-                recipientId: userId,
+                channelName,
                 content: message,
             },
         });
@@ -62,18 +55,45 @@ io.on('connection', socket => {
             },
         };
 
-        socket.emit('chat message', response);
-
-        const recipientSockets = USER_SOCKETS_MAP.get(userId);
-        if (!recipientSockets || recipientSockets.length === 0) return;
-        recipientSockets.forEach(s => s.emit('chat message', response));
+        io.to(channelName).emit('chat message', response);
     });
 
-    socket.on('delete message', messageId => {
+    socket.on('delete message', async ({ accessToken, messageId }) => {
+        const user = await getUserFromAccessToken(accessToken);
+        if (!user) return socket.emit('error', 'An error occurred');
+        const message = await prisma.message.findUnique({
+            where: {
+                id: messageId,
+            },
+        });
+
+        if (!message) return socket.emit('error', 'This message does not exist');
+
+        if (message.authorId !== user.id)
+            return socket.emit('error', 'You do not have permission to delete this message');
+
+        await prisma.message.delete({
+            where: {
+                id: messageId,
+            },
+        });
+
         io.emit('delete message', messageId);
     });
 
-    socket.on('edit message', ({ messageId, newContent }) => {
+    socket.on('edit message', ({ accessToken, messageId, newContent }) => {
+        const user = getUserFromAccessToken(accessToken);
+        if (!user) return socket.emit('error', 'An error occurred');
+        const message = prisma.message.findUnique({
+            where: {
+                id: messageId,
+            },
+        });
+
+        if (!message) return socket.emit('error', 'This message does not exist');
+
+        if (message.authorId !== user.id)
+            return socket.emit('error', 'You do not have permission to edit this message');
         io.emit('edit message', { messageId, newContent });
     });
 
